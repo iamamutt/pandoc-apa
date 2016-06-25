@@ -1,0 +1,172 @@
+$if(mode.jou)$
+% Journal mode
+\documentclass[$if(classoption)$$for(classoption)$$classoption$$sep$,$endfor$,jou,longtable$else$jou,longtable$endif$]{apa6}
+\usepackage{longtable}
+\makeatletter % two-column longtables for journal mode
+\let\saved@longtable\longtable
+\long\def\foo#1\LT@err#2#3#4!!{\def\longtable{#1#4}}
+\expandafter\foo\longtable!!
+\long\def\foo#1\@outputpage#2\@outputpage#3!!{
+\def\LT@output{#1\@opcol#2\@opcol#3}}
+\expandafter\foo\LT@output!!
+\makeatother
+% Journal specific commands may go here:
+$if(joucommands.leftheader)$
+\leftheader{$joucommands.leftheader$}$endif$
+$if(joucommands.journal)$
+\journal{$joucommands.journal$}$endif$
+$if(joucommands.volume)$
+\volume{$joucommands.volume$}$endif$
+$if(joucommands.ccoppy)$
+\ccoppy{$joucommands.ccoppy$}$endif$
+$if(joucommands.copnum)$
+\copnum{$joucommands.copnum$}$endif$
+$else$$if(mode.man)$
+% Manuscript mode
+\documentclass[$if(classoption)$$for(classoption)$$classoption$$sep$,$endfor$,man,longtable$else$man,longtable$endif$]{apa6}
+% man mode uses the endfloat package,
+% this will try to set tables and figures at the end for longtables too
+% keeping longtables with text won't work though
+\DeclareDelayedFloatFlavor{longtable}{table}
+$else$$if(mode.doc)$
+% Document mode
+\documentclass[$if(classoption)$$for(classoption)$$classoption$$sep$,$endfor$,doc,longtable$else$doc,longtable$endif$]{apa6}
+\usepackage{longtable}
+$else$
+% Manuscript mode
+\documentclass[$if(classoption)$$for(classoption)$$classoption$$sep$,$endfor$,man,longtable$else$man,longtable$endif$]{apa6}
+\DeclareDelayedFloatFlavor{longtable}{table}
+$endif$$endif$$endif$
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[american]{babel}
+\usepackage{csquotes}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[unicode=true]{hyperref}
+
+% Pandoc stuff
+\UseMicrotypeSet[protrusion]{basicmath}
+\let\tightlist\relax % empty pandoc tight list command
+\urlstyle{same} % url non-monotype
+
+% Hyperlinks and other metadata in pdf
+\hypersetup{unicode=true,
+$if(title-meta)$
+            pdftitle={$title-meta$},
+$endif$
+$if(author-meta)$
+            pdfauthor={$author-meta$},
+$endif$
+$if(keywords)$
+            pdfkeywords={$for(keywords)$$keywords$$sep$; $endfor$},
+$endif$
+$if(colorlinks)$
+            colorlinks=true,
+            linkcolor=$if(linkcolor)$$linkcolor$$else$blue$endif$,
+            citecolor=$if(citecolor)$$citecolor$$else$blue$endif$,
+            urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
+$else$
+            pdfborder={0 0 0},
+            colorlinks=true,
+            linkcolor=blue,
+            citecolor=blue,
+            urlcolor=blue,
+$endif$
+            breaklinks=true}
+
+$if(bibliography)$
+% References
+\usepackage[backend=biber,sortcites=true,style=apa,sorting=nyt,isbn=false,url=false]{biblatex}
+\DeclareLanguageMapping{american}{american-apa}
+$for(bibliography)$
+\addbibresource{$bibliography$}
+$endfor$$endif$
+
+$if(title)$
+% Title page stuff
+\title{$title$}
+$else$
+\title{~}$endif$
+$if(subtitle)$
+\shorttitle{$subtitle$}
+$else$
+\shorttitle{~}$endif$
+$if(author)$
+$if(twogroups)$
+\twoauthors$for(author)${$author$}$endfor$
+$else$$if(threegroups)$
+\threeauthors$for(author)${$author$}$endfor$
+$else$$if(fourgroups)$
+\fourauthors$for(author)${$author$}$endfor$
+$else$$if(fivegroups)$
+\fiveauthors$for(author)${$author$}$endfor$
+$else$$if(sixgroups)$
+\sixauthors$for(author)${$author$}$endfor$
+$else$
+\author{$for(author)$$author$$sep$, $endfor$}
+$endif$$endif$$endif$$endif$$endif$
+$else$
+\author{~}$endif$
+$if(institute)$
+$if(twogroups)$
+\twoaffiliations$for(institute)${$institute$}$endfor$
+$else$$if(threegroups)$
+\threeaffiliations$for(institute)${$institute$}$endfor$
+$else$$if(fourgroups)$
+\fouraffiliations$for(institute)${$institute$}$endfor$
+$else$$if(fivegroups)$
+\fiveaffiliations$for(institute)${$institute$}$endfor$
+$else$$if(sixgroups)$
+\sixaffiliations$for(institute)${$institute$}$endfor$
+$else$
+\affiliation{$for(institute)$$institute$$sep$\\ $endfor$}
+$endif$$endif$$endif$$endif$$endif$
+$else$
+\affiliation{~}$endif$
+
+$if(date)$
+\note{$date$}$endif$
+
+$if(authornote)$
+\authornote{%
+$authornote$
+}$endif$
+
+
+$if(abstract)$
+% Abstract page
+\abstract{%
+$abstract$
+}$endif$
+
+
+$if(keywords)$
+\keywords{$for(keywords)$$keywords$$sep$, $endfor$}$endif$
+
+$for(include-before)$
+% Other custom includes
+$include-before$
+
+$endfor$
+
+\begin{document}
+$if(title)$\maketitle$endif$
+
+$body$
+
+$if(bibliography)$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+
+$endif$
+$for(include-after)$
+$include-after$
+
+$endfor$
+
+\end{document}

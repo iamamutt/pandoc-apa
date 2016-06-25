@@ -1,0 +1,397 @@
+% Document mode
+\documentclass[doc,longtable]{apa6}
+\usepackage{longtable}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[american]{babel}
+\usepackage{csquotes}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[unicode=true]{hyperref}
+
+% Pandoc stuff
+\UseMicrotypeSet[protrusion]{basicmath}
+\let\tightlist\relax % empty pandoc tight list command
+\urlstyle{same} % url non-monotype
+
+% Hyperlinks and other metadata in pdf
+\hypersetup{unicode=true,
+            pdftitle={Writing an APA manuscript from Pandoc markdown},
+            pdfauthor={Author 1, Author 2; Author 3},
+            pdfkeywords={sublime text; pandoc; apa6},
+            pdfborder={0 0 0},
+            colorlinks=true,
+            linkcolor=blue,
+            citecolor=blue,
+            urlcolor=blue,
+            breaklinks=true}
+
+% References
+\usepackage[backend=biber,sortcites=true,style=apa,sorting=nyt,isbn=false,url=false]{biblatex}
+\DeclareLanguageMapping{american}{american-apa}
+\addbibresource{references.bib}
+
+% Title page stuff
+\title{Writing an APA manuscript from Pandoc markdown}
+\shorttitle{APA from markdown}
+\twoauthors{Author 1, Author 2}{Author 3}
+\twoaffiliations{Institute 1}{Institute 2}
+
+\note{Last updated: \today}
+\authornote{%
+\noindent Correspondence:
+
+Joseph M. Burling
+
+Department of Psychology
+
+6538 Franz Hall, UCLA
+
+Los Angeles, CA 90095-1563
+
+Email: jmburling@ucla.edu
+}
+
+% Abstract page
+\abstract{%
+This is just an example of using pandoc (with the help of sublime text build systems) to write in pandoc's markdown syntax for APA manuscripts. The output will be rendered in APA 6 format according to some commands and class options provided by the LaTeX \texttt{apa6} package. I also make use of a few pandoc filters downloaded as python modules to get cross-referencing to work. Lastly, I provide a .DOCX version of the build system, though a lot may not translate and will require some additional tweaking.
+}
+
+\keywords{sublime text, pandoc, apa6}
+
+\begin{document}
+\maketitle
+
+\section{Installation}\label{installation}
+
+\subsection{Pandoc}\label{pandoc}
+
+You need Pandoc to use the pandoc templates. You can find it here: \url{http://www.pandoc.org/}
+
+\subsection{LaTex / Word}\label{latex-word}
+
+You'll need a LaTeX distribution to build the pdf files (e.g., MikTex or MacTex), or Microsoft Word to build only .docx files.
+
+\subsection{Filters}\label{filters}
+
+Pandoc doesn't yet support cross referencing figures and tables. You'll need a Python distribution to install two filters to be able to do this. The filters are \texttt{pandoc-fignos} and \texttt{pandoc-tablenos}. You can find links and installation instructions here \url{https://github.com/tomduck/pandoc-fignos}
+
+\subsection{APA Template}\label{apa-template}
+
+Just copy all the contents of this repository wherever your Packages folder is located in Sublime Text. For example, if the contents are not already in a folder called \texttt{pandoc-apa}, make a folder called \texttt{pandoc-apa} and copy contents here if on Windows: \texttt{C:\textbackslash{}Users\textbackslash{}username\textbackslash{}AppData\textbackslash{}Roaming\textbackslash{}Sublime\ Text\ 3\textbackslash{}Packages\textbackslash{}User\textbackslash{}pandoc-apa}. You should see this README.md, \texttt{.sublime-build} file, and others directly in \texttt{pandoc-apa}.
+
+\section{Usage}\label{usage}
+
+\subsection{Sublime Text Usage}\label{sublime-text-usage}
+
+\begin{itemize}
+\item
+  Press \texttt{ctrl\ +\ b} to build to pdf (or \texttt{cmd+b})
+\item
+  Press \texttt{ctrl\ +\ shift\ +\ b} to build to docx (or \texttt{cmd+shift+b})
+\item
+  You can also go to \texttt{Tools\ \textgreater{}\ Build\ System\ \textgreater{}\ Pandoc\ APA}, then if you select \texttt{Tools\ \textgreater{}\ Build\ Width} you can see the different options. Default is .pdf. \texttt{Markdown\ to\ LaTeX} will convert a pandoc markdown document to a .tex file. \texttt{Run} will convert to .docx.
+\item
+  In a document, type \texttt{apayaml}, then press Tab. It will generate a YAML header. Or you can do this from \texttt{Tools\ \textgreater{}\ Snippets\ \textgreater{}\ "Insert\ Pandoc\ ..."}
+\end{itemize}
+
+\subsection{Pandoc YAML Metadata Block}\label{pandoc-yaml-metadata-block}
+
+These templates makes heavy use of the pandoc metadata block at the beginning of your document. I've also provided a snippet you can use to insert the metadata and fill in what is needed (Tools \textgreater{} Snippets). Most of the commands used in the \texttt{apa6} package are fields that can be used in the YAML header. See documentation for more details: \url{https://www.ctan.org/pkg/apa6?lang=en}. Fields used in this template are:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{mode}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Set to \texttt{man:\ true}, \texttt{doc:\ true}, or \texttt{jou:\ true}
+  \end{itemize}
+\item
+  \texttt{classoption}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A list of options that the \texttt{apa6} package will understand. See manual. Don't use \texttt{jou}, \texttt{man}, or \texttt{doc} options here. Use the dedicated YAML field \texttt{mode} instead. If the field isn't used, it defaults to manuscript mode. Also the \texttt{longtable} option is already specified since it's necessary for pandoc to work with tables. Don't put it twice.
+  \end{itemize}
+\item
+  \texttt{title}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Main title of the document. Consistent with the pandoc variable.
+  \end{itemize}
+\item
+  \texttt{subtitle}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Running head title. Consistent with the pandoc variable.
+  \end{itemize}
+\item
+  \texttt{author}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    List of authors. Put multiple authors on one line to group by affiliation. Consistent with the pandoc variable.
+  \end{itemize}
+\item
+  \texttt{institute}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    List of affiliations. Won't work with docx. You have to add it manually.
+  \end{itemize}
+\item
+  \texttt{twogroups}, \texttt{threegroups}, \ldots{} , \texttt{sixgroups}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Set one of these to true if grouping authors by different affiliations, as in the twogroup YAML example. If anyone of these options are not set, it will use the standard \texttt{\textbackslash{}author\{\}} command.
+  \end{itemize}
+\item
+  \texttt{authornote}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A note that will be placed at the bottom of the title page, or footnote if in \texttt{jou} mode.
+  \end{itemize}
+\item
+  \texttt{bibliography}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Location of your bibtex references file, whatever pandoc-citeproc will read. Can add multiple fields for multiple files.
+  \end{itemize}
+\item
+  \texttt{date}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Place anything typed here as you would in the \texttt{\textbackslash{}note\{\}} apa6 latex command.
+  \end{itemize}
+\item
+  \texttt{joucommands} (optional).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If you are in journal mode and want to use the other journal commands as seen in the example YAML header, add them here. See apa6 manual for list of commands.
+  \end{itemize}
+\item
+  \texttt{keywords}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    List of keywords that will show under the abstract. See YAML metadata example.
+  \end{itemize}
+\item
+  \texttt{abstract}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The abstract text of the manuscript.
+  \end{itemize}
+\end{itemize}
+
+\section{Quick pandoc overview}\label{quick-pandoc-overview}
+
+Words go here, also here is a citation \autocite{someArticle}. According to \textcite{anotherArticle}, something bad happened. See Figure \ref{fig:myplot}. This is a bold statement\ldots{} \textbf{WOW!}, and here's \_some \emph{emphasis for you} too. Sometimes you need some typewrite-like font, like when writing code: \texttt{my\_answer\ =\ 1\ +\ 1}. Other types you may need to write blocks of code, like this:
+
+\begin{verbatim}
+\begin{table}
+\centering
+\begin{tabular}{|l|l|}\hline
+Age & Frequency \\ \hline
+18--25  & 15 \\
+26--35  & 33 \\
+36--45  & 22 \\ \hline
+\end{tabular}
+\end{table}
+\end{verbatim}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=3.00000in]{plot.png}
+\caption{Your figure caption goes here.\label{fig:myplot}}
+\end{figure}
+
+See Table \ref{tbl:mytable} for an example on making tables using the default extension. In APA man mode, Tables are sent to the end of the document unless the following is used in the YAML header at the top of this document:
+
+\begin{verbatim}
+classoption:
+    - floatsintext
+\end{verbatim}
+
+\begin{longtable}[]{@{}rllc@{}}
+\caption{A table. \label{tbl:mytable}}\tabularnewline
+\toprule
+Right & Left & Default & Center\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+Right & Left & Default & Center\tabularnewline
+\midrule
+\endhead
+12 & 12 & 12 & 12\tabularnewline
+123 & 123 & 123 & 123\tabularnewline
+1 & 1 & 1 & 1\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{itemize}
+\tightlist
+\item
+  This is another type of pandoc table (\ref{tbl:anotherone}). It should look the same.\footnote{Sometimes docx files will have tables that are squished. Autofit the document width to fix.}
+\end{itemize}
+
+\begin{longtable}[]{@{}rllc@{}}
+\caption{Another one \label{tbl:anotherone}}\tabularnewline
+\toprule
+Right & Left & Default & Center\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+Right & Left & Default & Center\tabularnewline
+\midrule
+\endhead
+12 & 12 & 12 & 12\tabularnewline
+123 & 123 & 123 & 123\tabularnewline
+1 & 1 & 1 & 1\tabularnewline
+\bottomrule
+\end{longtable}
+
+\newpage
+
+\begin{longtable}[]{@{}lll@{}}
+\caption{And another multi-line table which is more complicated to make. It may requires a pagebreak in two-column (jou) mode because pandoc uses \texttt{longtable} which doesn't work in two-column mode.Some additional latex hacks are added to the template to allow it to work (at the risk of losing content or bleeding off the page. Blame pandoc for using \texttt{longtable}).}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
+Fruit\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
+Price\strut
+\end{minipage} & \begin{minipage}[b]{0.27\columnwidth}\raggedright\strut
+Advantages\strut
+\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
+Fruit\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
+Price\strut
+\end{minipage} & \begin{minipage}[b]{0.27\columnwidth}\raggedright\strut
+Advantages\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+Bananas\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\$1.34\strut
+\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  built-in wrapper
+\item
+  bright color
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+Oranges\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\$2.10\strut
+\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  cures scurvy
+\item
+  tasty
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{itemize}
+\tightlist
+\item
+  Here's some raw latex code. It won't be recognized unless the output is LaTeX/pdf and you have to proper parse-raw option set. It's the same LaTeX code block from above rendered as an actual Table \ref{tbl:rawtex}. The position may shift because it's a floating environment.
+\end{itemize}
+
+\begin{table}
+\centering
+\caption{Using raw latex code}
+\label{tbl:rawtex}
+\begin{tabular}{|l|l|}\hline
+Age & Frequency \\ \hline
+18--25  & 15 \\
+26--35  & 33 \\
+36--45  & 22 \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+\item
+  Here's an example of inline LaTeX math, \(p=.0499\).
+\item
+  Here's a an example of using LaTeX syntax for displaying equations.
+\end{itemize}
+
+\[
+\hat{y} = \beta_0 + \beta_1 x
+\]
+
+Pandoc doesn't know how to make inline headings when converting to Word. If you put the cursor at the end of the heading, press Ctrl+Alt+Enter and it will move it down.
+
+\subsection{Subsection heading}\label{subsection-heading}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec egestas sit amet, convallis a felis. Praesent dictum nec mauris quis molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien tempor risus, quis congue sapien turpis et justo. Suspendisse potenti.
+
+Duis viverra aliquet metus, eget aliquam tellus mollis imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec egestas sit amet, convallis a felis.
+
+\subsubsection{Subsubsection heading}\label{subsubsection-heading}
+
+Nullam nec est ut mauris eleifend pulvinar ac in nisl. In eleifend, velit et rhoncus pretium, justo lectus viverra enim, nec feugiat ante mauris vitae magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi felis nulla, iaculis dapibus sapien quis, pretium laoreet est. Mauris vel sapien tempor, dapibus ipsum sit amet, sagittis tellus. Aliquam ipsum metus, ultricies eleifend dolor nec, ultricies mollis sapien. Integer placerat ante condimentum sagittis elementum. Fusce aliquam, libero a iaculis eleifend, ipsum ante tincidunt ante, ut bibendum dolor risus ut nibh. Sed fermentum tellus id ligula sodales, ut condimentum tortor tempus. Phasellus suscipit dapibus est sed consectetur.
+
+Nullam nec est ut mauris eleifend pulvinar ac in nisl. In eleifend, velit et rhoncus pretium, justo lectus viverra enim, nec feugiat ante mauris vitae magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi felis nulla, iaculis dapibus sapien quis, pretium laoreet est. Mauris vel sapien tempor, dapibus ipsum sit amet, sagittis tellus. Aliquam ipsum metus, ultricies eleifend dolor nec, ultricies mollis sapien. Integer placerat ante condimentum sagittis elementum. Fusce aliquam, libero a iaculis eleifend, ipsum ante tincidunt ante, ut bibendum dolor risus ut nibh. Sed fermentum tellus id ligula sodales, ut condimentum tortor tempus. Phasellus suscipit dapibus est sed consectetur.
+
+\paragraph{Paragraph heading}\label{paragraph-heading}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec egestas sit amet, convallis a felis. Praesent dictum nec mauris quis molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien tempor risus, quis congue sapien turpis et justo. Suspendisse potenti. Duis viverra aliquet metus, eget aliquam tellus mollis imperdiet.
+
+\subparagraph{Subparagraph heading}\label{subparagraph-heading}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec egestas sit amet, convallis a felis. Praesent dictum nec mauris quis molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien tempor risus, quis congue sapien turpis et justo. Suspendisse potenti. Duis viverra aliquet metus, eget aliquam tellus mollis imperdiet.
+
+Getting silly with the amount of subheadings.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec egestas sit amet, convallis a felis. Praesent dictum nec mauris quis molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien tempor risus, quis congue sapien turpis et justo. Suspendisse potenti. Duis viverra aliquet metus, eget aliquam tellus mollis imperdiet.
+
+Nullam nec est ut mauris eleifend pulvinar ac in nisl. In eleifend, velit et rhoncus pretium, justo lectus viverra enim, nec feugiat ante mauris vitae magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi felis nulla, iaculis dapibus sapien quis, pretium laoreet est. Mauris vel sapien tempor, dapibus ipsum sit amet, sagittis tellus. Aliquam ipsum metus, ultricies eleifend dolor nec, ultricies mollis sapien. Integer placerat ante condimentum sagittis elementum. Fusce aliquam, libero a iaculis eleifend, ipsum ante tincidunt ante, ut bibendum dolor risus ut nibh. Sed fermentum tellus id ligula sodales, ut condimentum tortor tempus. Phasellus suscipit dapibus est sed consectetur.
+
+\newpage
+
+\printbibliography[title=References]
+
+
+\end{document}
