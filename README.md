@@ -1,5 +1,6 @@
 # pandoc-apa
-A Sublime Text build system and template for writing APA manuscripts with pandoc markdown
+
+A Sublime Text build system / Visual Studio Code task runner for writing APA manuscripts with pandoc markdown
 
 # Installation
 
@@ -9,19 +10,17 @@ You need Pandoc to use the pandoc templates. You can find it here: <http://www.p
 
 ## LaTex / Word
 
-You'll need a LaTeX distribution to build the pdf files (e.g., MikTex or MacTex), or Microsoft Word to build only .docx files.
+You'll need a LaTeX distribution to build the pdf files (e.g., MikTex or MacTex), or Microsoft Word to build .docx files.
 
 ## Filters
 
 Pandoc doesn't yet support cross referencing figures and tables. You'll need a Python distribution to install two filters to be able to do this. The filters are `pandoc-fignos` and `pandoc-tablenos`. You can find links and installation instructions here <https://github.com/tomduck/pandoc-fignos>
 
-## APA Template
-
-Just copy all the contents of this repository wherever your Packages folder is located in Sublime Text. For example, if the contents are not already in a folder called `pandoc-apa`, make a folder called `pandoc-apa` and copy contents here if on Windows: `C:\Users\username\AppData\Roaming\Sublime Text 3\Packages\User\pandoc-apa`. You should see this README.md, `.sublime-build` file, and others directly in `pandoc-apa`.
-
 # Usage
 
-## Sublime Text Usage
+## Sublime Text
+
+Just copy the `pandoc` and `sublime` directories from this repository wherever your Packages folder is located in Sublime Text. For example, if the contents are not already in a folder called `pandoc-apa`, make a folder called `pandoc-apa` and copy contents here if on Windows: `C:\Users\username\AppData\Roaming\Sublime Text 3\Packages\User\pandoc-apa`.
 
 - Press `ctrl + b` to build to pdf (or `cmd+b`)
 
@@ -30,6 +29,13 @@ Just copy all the contents of this repository wherever your Packages folder is l
 - You can also go to `Tools > Build System > Pandoc APA`, then if you select `Tools > Build Width` you can see the different options. Default is .pdf. `Markdown to LaTeX` will convert a pandoc markdown document to a .tex file. `Run` will convert to .docx.
 
 - In a document, type `apayaml`, then press Tab. It will generate a YAML header. Or you can do this from `Tools > Snippets > "Insert Pandoc ..."`
+
+## Visual Studio Code
+
+
+Copy the `.vscode` and `pandoc` directories to where your main markdown file is located. 
+Open the folder containing your markdown file as a vscode workspace. 
+Press `Ctrl+Shift+B` to run the build task or press `F1` then type `task`, select "run task", then choose one of the Pandoc options.
 
 
 ## Pandoc YAML Metadata Block

@@ -39,3 +39,4 @@
 # algorithms
 *.alg
 *.loa
+**/.jsbeautifyrc
