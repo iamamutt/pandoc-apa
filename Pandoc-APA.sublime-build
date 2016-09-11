@@ -25,7 +25,9 @@
         "--csl",
         "$packages/User/pandoc-apa/apa.csl",
         "--data-dir",
-        "${packages}/User/pandoc-apa"
+        "${packages}/User/pandoc-apa",
+        "--dpi",
+        "300"
     ],
     "file_regex": "^((?:.:)?[^:\n\r]*):([0-9]+):?([0-9]+)?:? (.*)$",
     "osx": {
@@ -89,7 +91,9 @@
                 "--data-dir",
                 "${packages}/User/pandoc-apa",
                 "--reference-docx",
-                "$packages/User/pandoc-apa/apa.docx"
+                "$packages/User/pandoc-apa/apa.docx",
+                "--dpi",
+                "300"
             ],
             "name": "Run"
         }
