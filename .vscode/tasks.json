@@ -22,8 +22,8 @@
     },
     {
         "taskName": "Pandoc-APA DOCX",
-        "args": [ "-o", "${fileDirname}/manuscript.docx", "--reference-docx",
-            "${workspaceRoot}/pandoc/apa.docx"
+        "args": [ "-o", "${fileDirname}/manuscript.docx",
+            "--reference-docx", "${workspaceRoot}/pandoc/apa.docx"
         ]
     },
     {
