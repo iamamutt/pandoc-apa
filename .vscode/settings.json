@@ -1,0 +1,12 @@
+{
+    "editor.wrappingColumn": 0,
+    "editor.insertSpaces": false,
+    "markdownlint.config":
+    {
+        "default": true,
+        "MD007": false,
+        "no-hard-tabs": false,
+        "line-length": false,
+        "MD035": {"style": "---"}
+    }
+}
