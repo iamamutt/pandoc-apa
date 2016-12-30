@@ -67,6 +67,43 @@ This is just an example of using pandoc (with the help of some build systems) to
 \begin{document}
 \maketitle
 
+% pandoc-xnos: macro to create a caption without a prefix
+\makeatletter
+\def\LT@makenoprefixcaption#1#2#3{%
+  \LT@mcol\LT@cols c{\hbox to\z@{\hss\parbox[t]\LTcapwidth{
+    \sbox\@tempboxa{#1{}#3}
+    \ifdim\wd\@tempboxa>\hsize
+      #1{}#3
+    \else
+      \hbox to\hsize{\hfil\box\@tempboxa\hfil}%
+    \fi
+    \endgraf\vskip\baselineskip}
+  \hss}}}
+\makeatother
+
+% pandoc-tablenos: save original macros
+\makeatletter
+\let\LT@oldmakecaption=\LT@makecaption
+\let\oldthetable=\thetable
+\let\oldtheHtable=\theHtable
+\makeatother
+
+% pandoc-tablenos: environment disables table caption prefixes
+\makeatletter
+\newcounter{tableno}
+\newenvironment{no-prefix-table-caption}{
+  \let\LT@makecaption=\LT@makenoprefixcaption
+  \renewcommand\thetable{x.\thetableno}
+  \renewcommand\theHtable{x.\thetableno}
+  \stepcounter{tableno}
+}{
+  \let\thetable=\oldthetable
+  \let\theHtable=\oldtheHtable
+  \let\LT@makecaption=\LT@oldmakecaption
+  \addtocounter{table}{-1}
+}
+\makeatother
+
 \section{Quick pandoc overview}\label{quick-pandoc-overview}
 
 Words go here, also here is a citation \autocite{someArticle}. According to \textcite{anotherArticle}, something bad happened. See Figure \ref{fig:myplot}. This is a bold statement\ldots{} \textbf{WOW!}, and here's \_some \emph{emphasis for you} too. Sometimes you need some typewrite-like font, like when writing code: \texttt{my\_answer\ =\ 1\ +\ 1}. Other types you may need to write blocks of code, like this:
@@ -83,7 +120,7 @@ Age & Frequency \\ \hline
 \end{table}
 \end{verbatim}
 
-\begin{figure}[htbp]
+\begin{figure}
 \centering
 \includegraphics[width=3.00000in]{example/plot.png}
 \caption{Your figure caption goes here.\label{fig:myplot}}
@@ -136,6 +173,8 @@ Right & Left & Default & Center\tabularnewline
 
 \newpage
 
+\begin{no-prefix-table-caption}
+
 \begin{longtable}[]{@{}lll@{}}
 \caption{And another multi-line table which is more complicated to make. It may requires a pagebreak in two-column (jou) mode because pandoc uses \texttt{longtable} which doesn't work in two-column mode.Some additional latex hacks are added to the template to allow it to work (at the risk of losing content or bleeding off the page. Blame pandoc for using \texttt{longtable}).}\tabularnewline
 \toprule
@@ -158,11 +197,11 @@ Advantages\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
 Bananas\strut
-\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
 \$1.34\strut
-\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
 \begin{itemize}
 \tightlist
 \item
@@ -171,11 +210,11 @@ Bananas\strut
   bright color
 \end{itemize}\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
 Oranges\strut
-\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
 \$2.10\strut
-\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
 \begin{itemize}
 \tightlist
 \item
@@ -186,6 +225,8 @@ Oranges\strut
 \end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
+
+\end{no-prefix-table-caption}
 
 \begin{itemize}
 \tightlist
@@ -238,7 +279,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ip
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec egestas sit amet, convallis a felis. Praesent dictum nec mauris quis molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien tempor risus, quis congue sapien turpis et justo. Suspendisse potenti. Duis viverra aliquet metus, eget aliquam tellus mollis imperdiet.
 
-Getting silly with the amount of subheadings.
+Getting silly with the amount of subheadings
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec egestas sit amet, convallis a felis. Praesent dictum nec mauris quis molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien tempor risus, quis congue sapien turpis et justo. Suspendisse potenti. Duis viverra aliquet metus, eget aliquam tellus mollis imperdiet.
 
