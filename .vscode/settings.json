@@ -1,5 +1,5 @@
 {
-    "editor.wrappingColumn": 0,
+    "editor.wordWrap": "bounded",
     "editor.insertSpaces": false,
     "markdownlint.config":
     {

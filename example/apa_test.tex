@@ -59,7 +59,14 @@ Email: jmburling@ucla.edu
 
 % Abstract page
 \abstract{%
-This is just an example of using pandoc (with the help of some build systems) to write in pandoc's markdown syntax for APA manuscripts. The output will be rendered in APA 6 format according to some commands and class options provided by the LaTeX \texttt{apa6} package. I also make use of a few pandoc filters downloaded as python modules to get cross-referencing to work. Lastly, I provide a .DOCX version of the build system, though a lot may not translate and will require some additional tweaking.
+This is just an example of using pandoc (with the help of some build
+systems) to write in pandoc's markdown syntax for APA manuscripts. The
+output will be rendered in APA 6 format according to some commands and
+class options provided by the LaTeX \texttt{apa6} package. I also make
+use of a few pandoc filters downloaded as python modules to get
+cross-referencing to work. Lastly, I provide a .DOCX version of the
+build system, though a lot may not translate and will require some
+additional tweaking.
 }
 
 \keywords{sublime text, vscode, pandoc, apa6}
@@ -106,7 +113,13 @@ This is just an example of using pandoc (with the help of some build systems) to
 
 \section{Quick pandoc overview}\label{quick-pandoc-overview}
 
-Words go here, also here is a citation \autocite{someArticle}. According to \textcite{anotherArticle}, something bad happened. See Figure \ref{fig:myplot}. This is a bold statement\ldots{} \textbf{WOW!}, and here's \_some \emph{emphasis for you} too. Sometimes you need some typewrite-like font, like when writing code: \texttt{my\_answer\ =\ 1\ +\ 1}. Other types you may need to write blocks of code, like this:
+Words go here, also here is a citation \autocite{someArticle}. According
+to \textcite{anotherArticle}, something bad happened. See Figure
+\ref{fig:myplot}. This is a bold statement\ldots{} \textbf{WOW!}, and
+here's \_some \emph{emphasis for you} too. Sometimes you need some
+typewrite-like font, like when writing code:
+\texttt{my\_answer\ =\ 1\ +\ 1}. Other types you may need to write
+blocks of code, like this:
 
 \begin{verbatim}
 \begin{table}
@@ -126,7 +139,10 @@ Age & Frequency \\ \hline
 \caption{Your figure caption goes here.\label{fig:myplot}}
 \end{figure}
 
-See Table \ref{tbl:mytable} for an example on making tables using the default extension. In APA man mode, Tables are sent to the end of the document unless the following is used in the YAML header at the top of this document:
+See Table \ref{tbl:mytable} for an example on making tables using the
+default extension. In APA man mode, Tables are sent to the end of the
+document unless the following is used in the YAML header at the top of
+this document:
 
 \begin{verbatim}
 classoption:
@@ -152,7 +168,9 @@ Right & Left & Default & Center\tabularnewline
 \begin{itemize}
 \tightlist
 \item
-  This is another type of pandoc table (\ref{tbl:anotherone}). It should look the same.\footnote{Sometimes docx files will have tables that are squished. Autofit the document width to fix.}
+  This is another type of pandoc table (\ref{tbl:anotherone}). It should
+  look the same.\footnote{Sometimes docx files will have tables that are
+    squished. Autofit the document width to fix.}
 \end{itemize}
 
 \begin{longtable}[]{@{}rllc@{}}
@@ -176,7 +194,12 @@ Right & Left & Default & Center\tabularnewline
 \begin{no-prefix-table-caption}
 
 \begin{longtable}[]{@{}lll@{}}
-\caption{And another multi-line table which is more complicated to make. It may requires a pagebreak in two-column (jou) mode because pandoc uses \texttt{longtable} which doesn't work in two-column mode.Some additional latex hacks are added to the template to allow it to work (at the risk of losing content or bleeding off the page. Blame pandoc for using \texttt{longtable}).}\tabularnewline
+\caption{And another multi-line table which is more complicated to make.
+It may requires a pagebreak in two-column (jou) mode because pandoc uses
+\texttt{longtable} which doesn't work in two-column mode.Some additional
+latex hacks are added to the template to allow it to work (at the risk
+of losing content or bleeding off the page. Blame pandoc for using
+\texttt{longtable}).}\tabularnewline
 \toprule
 \begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
 Fruit\strut
@@ -231,7 +254,11 @@ Oranges\strut
 \begin{itemize}
 \tightlist
 \item
-  Here's some raw latex code. It won't be recognized unless the output is LaTeX/pdf and you have to proper parse-raw option set. It's the same LaTeX code block from above rendered as an actual Table \ref{tbl:rawtex}. The position may shift because it's a floating environment.
+  Here's some raw latex code. It won't be recognized unless the output
+  is LaTeX/pdf and you have to proper parse-raw option set. It's the
+  same LaTeX code block from above rendered as an actual Table
+  \ref{tbl:rawtex}. The position may shift because it's a floating
+  environment.
 \end{itemize}
 
 \begin{table}
@@ -257,33 +284,107 @@ Age & Frequency \\ \hline
 \hat{y} = \beta_0 + \beta_1 x
 \]
 
-Pandoc doesn't know how to make inline headings when converting to Word. If you put the cursor at the end of the heading, press Ctrl+Alt+Enter and it will move it down.
+Pandoc doesn't know how to make inline headings when converting to Word.
+If you put the cursor at the end of the heading, press Ctrl+Alt+Enter
+and it will move it down.
 
 \subsection{Subsection heading}\label{subsection-heading}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec egestas sit amet, convallis a felis. Praesent dictum nec mauris quis molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien tempor risus, quis congue sapien turpis et justo. Suspendisse potenti.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna
+vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris
+ac urna porta placerat. Ut ante neque, malesuada ut lobortis
+ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium
+venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc.
+Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec
+egestas sit amet, convallis a felis. Praesent dictum nec mauris quis
+molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien
+tempor risus, quis congue sapien turpis et justo. Suspendisse potenti.
 
-Duis viverra aliquet metus, eget aliquam tellus mollis imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec egestas sit amet, convallis a felis.
+Duis viverra aliquet metus, eget aliquam tellus mollis imperdiet. Lorem
+ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae
+ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris ac
+urna porta placerat. Ut ante neque, malesuada ut lobortis ullamcorper,
+consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem
+libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices
+sagittis porta. Curabitur diam elit, lacinia nec egestas sit amet,
+convallis a felis.
 
 \subsubsection{Subsubsection heading}\label{subsubsection-heading}
 
-Nullam nec est ut mauris eleifend pulvinar ac in nisl. In eleifend, velit et rhoncus pretium, justo lectus viverra enim, nec feugiat ante mauris vitae magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi felis nulla, iaculis dapibus sapien quis, pretium laoreet est. Mauris vel sapien tempor, dapibus ipsum sit amet, sagittis tellus. Aliquam ipsum metus, ultricies eleifend dolor nec, ultricies mollis sapien. Integer placerat ante condimentum sagittis elementum. Fusce aliquam, libero a iaculis eleifend, ipsum ante tincidunt ante, ut bibendum dolor risus ut nibh. Sed fermentum tellus id ligula sodales, ut condimentum tortor tempus. Phasellus suscipit dapibus est sed consectetur.
+Nullam nec est ut mauris eleifend pulvinar ac in nisl. In eleifend,
+velit et rhoncus pretium, justo lectus viverra enim, nec feugiat ante
+mauris vitae magna. Lorem ipsum dolor sit amet, consectetur adipiscing
+elit. Morbi felis nulla, iaculis dapibus sapien quis, pretium laoreet
+est. Mauris vel sapien tempor, dapibus ipsum sit amet, sagittis tellus.
+Aliquam ipsum metus, ultricies eleifend dolor nec, ultricies mollis
+sapien. Integer placerat ante condimentum sagittis elementum. Fusce
+aliquam, libero a iaculis eleifend, ipsum ante tincidunt ante, ut
+bibendum dolor risus ut nibh. Sed fermentum tellus id ligula sodales, ut
+condimentum tortor tempus. Phasellus suscipit dapibus est sed
+consectetur.
 
-Nullam nec est ut mauris eleifend pulvinar ac in nisl. In eleifend, velit et rhoncus pretium, justo lectus viverra enim, nec feugiat ante mauris vitae magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi felis nulla, iaculis dapibus sapien quis, pretium laoreet est. Mauris vel sapien tempor, dapibus ipsum sit amet, sagittis tellus. Aliquam ipsum metus, ultricies eleifend dolor nec, ultricies mollis sapien. Integer placerat ante condimentum sagittis elementum. Fusce aliquam, libero a iaculis eleifend, ipsum ante tincidunt ante, ut bibendum dolor risus ut nibh. Sed fermentum tellus id ligula sodales, ut condimentum tortor tempus. Phasellus suscipit dapibus est sed consectetur.
+Nullam nec est ut mauris eleifend pulvinar ac in nisl. In eleifend,
+velit et rhoncus pretium, justo lectus viverra enim, nec feugiat ante
+mauris vitae magna. Lorem ipsum dolor sit amet, consectetur adipiscing
+elit. Morbi felis nulla, iaculis dapibus sapien quis, pretium laoreet
+est. Mauris vel sapien tempor, dapibus ipsum sit amet, sagittis tellus.
+Aliquam ipsum metus, ultricies eleifend dolor nec, ultricies mollis
+sapien. Integer placerat ante condimentum sagittis elementum. Fusce
+aliquam, libero a iaculis eleifend, ipsum ante tincidunt ante, ut
+bibendum dolor risus ut nibh. Sed fermentum tellus id ligula sodales, ut
+condimentum tortor tempus. Phasellus suscipit dapibus est sed
+consectetur.
 
 \paragraph{Paragraph heading}\label{paragraph-heading}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec egestas sit amet, convallis a felis. Praesent dictum nec mauris quis molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien tempor risus, quis congue sapien turpis et justo. Suspendisse potenti. Duis viverra aliquet metus, eget aliquam tellus mollis imperdiet.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna
+vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris
+ac urna porta placerat. Ut ante neque, malesuada ut lobortis
+ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium
+venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc.
+Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec
+egestas sit amet, convallis a felis. Praesent dictum nec mauris quis
+molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien
+tempor risus, quis congue sapien turpis et justo. Suspendisse potenti.
+Duis viverra aliquet metus, eget aliquam tellus mollis imperdiet.
 
 \subparagraph{Subparagraph heading}\label{subparagraph-heading}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec egestas sit amet, convallis a felis. Praesent dictum nec mauris quis molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien tempor risus, quis congue sapien turpis et justo. Suspendisse potenti. Duis viverra aliquet metus, eget aliquam tellus mollis imperdiet.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna
+vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris
+ac urna porta placerat. Ut ante neque, malesuada ut lobortis
+ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium
+venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc.
+Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec
+egestas sit amet, convallis a felis. Praesent dictum nec mauris quis
+molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien
+tempor risus, quis congue sapien turpis et justo. Suspendisse potenti.
+Duis viverra aliquet metus, eget aliquam tellus mollis imperdiet.
 
 Getting silly with the amount of subheadings
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec egestas sit amet, convallis a felis. Praesent dictum nec mauris quis molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien tempor risus, quis congue sapien turpis et justo. Suspendisse potenti. Duis viverra aliquet metus, eget aliquam tellus mollis imperdiet.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna
+vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris
+ac urna porta placerat. Ut ante neque, malesuada ut lobortis
+ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium
+venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc.
+Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec
+egestas sit amet, convallis a felis. Praesent dictum nec mauris quis
+molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien
+tempor risus, quis congue sapien turpis et justo. Suspendisse potenti.
+Duis viverra aliquet metus, eget aliquam tellus mollis imperdiet.
 
-Nullam nec est ut mauris eleifend pulvinar ac in nisl. In eleifend, velit et rhoncus pretium, justo lectus viverra enim, nec feugiat ante mauris vitae magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi felis nulla, iaculis dapibus sapien quis, pretium laoreet est. Mauris vel sapien tempor, dapibus ipsum sit amet, sagittis tellus. Aliquam ipsum metus, ultricies eleifend dolor nec, ultricies mollis sapien. Integer placerat ante condimentum sagittis elementum. Fusce aliquam, libero a iaculis eleifend, ipsum ante tincidunt ante, ut bibendum dolor risus ut nibh. Sed fermentum tellus id ligula sodales, ut condimentum tortor tempus. Phasellus suscipit dapibus est sed consectetur.
+Nullam nec est ut mauris eleifend pulvinar ac in nisl. In eleifend,
+velit et rhoncus pretium, justo lectus viverra enim, nec feugiat ante
+mauris vitae magna. Lorem ipsum dolor sit amet, consectetur adipiscing
+elit. Morbi felis nulla, iaculis dapibus sapien quis, pretium laoreet
+est. Mauris vel sapien tempor, dapibus ipsum sit amet, sagittis tellus.
+Aliquam ipsum metus, ultricies eleifend dolor nec, ultricies mollis
+sapien. Integer placerat ante condimentum sagittis elementum. Fusce
+aliquam, libero a iaculis eleifend, ipsum ante tincidunt ante, ut
+bibendum dolor risus ut nibh. Sed fermentum tellus id ligula sodales, ut
+condimentum tortor tempus. Phasellus suscipit dapibus est sed
+consectetur.
 
 \newpage
 
