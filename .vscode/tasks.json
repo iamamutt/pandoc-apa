@@ -1,69 +1,107 @@
 {
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
-    "version": "0.1.0",
+    "version": "2.0.0",
     "command": "pandoc",
-    "isShellCommand": true,
-    "args": [ "${file}", "--parse-raw", "--normalize", "--data-dir",
-        "${workspaceRoot}/pandoc"
+    "type": "shell",
+    "group": "build",
+    "args": ["${file}",
+        "--data-dir=${workspaceRoot}/pandoc",
+        "--from=markdown"
     ],
-    "showOutput": "always",
-    "echoCommand": true,
+    "presentation":
+    {
+        "reveal": "silent",
+        "focus": false,
+        "echo": true,
+        "panel": "dedicated"
+    },
     "tasks": [
-    {
-        "taskName": "Pandoc-APA PDF",
-        "suppressTaskName": true,
-        "isBuildCommand": true,
-        "args": [ "-f", "markdown", "-t", "latex", "-o",
-            "${fileDirname}/${fileBasenameNoExtension}.pdf",
-            "--filter", "pandoc-fignos", "--filter",
-            "pandoc-tablenos", "--filter", "pandoc-citeproc",
-            "--csl", "${workspaceRoot}/pandoc/apa.csl", "--smart",
-            "--template",
-            "${workspaceRoot}/pandoc/apa_template.tex"
-        ]
-    },
-    {
-        "taskName": "Pandoc-APA DOCX",
-        "suppressTaskName": true,
-        "args": [ "-f", "markdown", "-t", "docx", "-o",
-            "${fileDirname}/${fileBasenameNoExtension}.docx",
-            "--dpi", "300", "--filter", "pandoc-fignos", "--filter",
-            "pandoc-tablenos", "--filter", "pandoc-citeproc",
-            "--csl", "${workspaceRoot}/pandoc/apa.csl",
-            "--reference-docx", "${workspaceRoot}/pandoc/apa.docx",
-            "--smart"
-        ]
-    },
-    {
-        "taskName": "Pandoc-APA DOCX-RAW",
-        "suppressTaskName": true,
-        "args": [ "-f", "markdown", "-t", "docx", "-o",
-            "${fileDirname}/${fileBasenameNoExtension}.docx",
-            "--dpi", "300", "--reference-docx",
-            "${workspaceRoot}/pandoc/apa.docx"
-        ]
-    },
-    {
-        "taskName": "Pandoc-APA TEX",
-        "suppressTaskName": true,
-        "args": [ "-f", "markdown", "-t", "latex", "-o",
-            "${fileDirname}/${fileBasenameNoExtension}.tex",
-            "--standalone", "--template",
-            "${workspaceRoot}/pandoc/apa_template.tex", "--filter",
-            "pandoc-fignos", "--filter", "pandoc-tablenos",
-            "--filter", "pandoc-citeproc", "--csl",
-            "${workspaceRoot}/pandoc/apa.csl", "--biblatex"
-        ]
-    },
-    {
-        "taskName": "Pandoc-APA Word2MD",
-        "suppressTaskName": true,
-        "args": [ "-f", "docx", "-t",
-            "markdown+hard_line_breaks-tex_math_single_backslash-tex_math_double_backslash",
-            "-o",
-            "${fileDirname}/${fileBasenameNoExtension}_copy.md",
-            "--track-changes", "accept"
-        ]
-    } ]
+        {
+            "taskName": "Pandoc test",
+            "suppressTaskName": true,
+            "group": "build",
+            "command": "pandoc",
+            "args": [
+                "-v"
+            ]
+        },
+        {
+            "taskName": "APA PDF",
+            "suppressTaskName": true,
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "args": [
+                "--to=latex+smart",
+                "--output=${fileDirname}/${fileBasenameNoExtension}.pdf",
+                "--filter=pandoc-fignos",
+                "--filter=pandoc-tablenos",
+                "--filter=pandoc-citeproc",
+                "--csl=${workspaceRoot}/pandoc/apa.csl",
+                "--template=${workspaceRoot}/pandoc/apa_template.tex",
+                "--standalone"
+            ]
+        },
+        {
+            "taskName": "APA DOCX",
+            "suppressTaskName": true,
+            "group": "build",
+            "args": [
+                "--to=docx+smart",
+                "--output=${fileDirname}/${fileBasenameNoExtension}.docx",
+                "--dpi=300",
+                "--filter=pandoc-fignos",
+                "--filter=pandoc-tablenos",
+                "--filter=pandoc-citeproc",
+                "--csl=${workspaceRoot}/pandoc/apa.csl",
+                "--reference-doc=${workspaceRoot}/pandoc/apa.docx"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "taskName": "APA DOCX-RAW",
+            "suppressTaskName": true,
+            "group": "build",
+            "args": [
+                "--to=docx-smart-citations",
+                "--output=${fileDirname}/${fileBasenameNoExtension}_raw.docx",
+                "--dpi=300",
+                "--reference-doc=${workspaceRoot}/pandoc/apa.docx"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "taskName": "APA TEX",
+            "suppressTaskName": true,
+            "group": "build",
+            "args": [
+                "--to=latex+smart",
+                "--output=${fileDirname}/${fileBasenameNoExtension}.tex",
+                "--filter=pandoc-fignos",
+                "--filter=pandoc-tablenos",
+                "--filter=pandoc-citeproc",
+                "--csl=${workspaceRoot}/pandoc/apa.csl",
+                "--template=${workspaceRoot}/pandoc/apa_template.tex",
+                "--standalone",
+                "--biblatex"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "taskName": "DOCX2MD",
+            "suppressTaskName": true,
+            "command": "pandoc",
+            "group": "build",
+            "args": [
+                "${file}",
+                "--from=docx",
+                "--to=markdown+hard_line_breaks-tex_math_single_backslash-tex_math_double_backslash",
+                "--output=${fileDirname}/${fileBasenameNoExtension}_docx2md.md",
+                "--track-changes=accept"
+            ],
+            "problemMatcher": []
+        }
+    ]
 }
