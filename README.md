@@ -1,16 +1,16 @@
 # pandoc-apa
 
-A Sublime Text build system / Visual Studio Code task runner for writing APA manuscripts with pandoc markdown
+A Sublime Text build system / Visual Studio Code task runner for writing APA manuscripts with Pandoc formatted markdown
 
 # Installation
 
 ## Pandoc
 
-You need Pandoc to use the pandoc templates. You can find it here: <http://www.pandoc.org/>
+You need Pandoc to use the pandoc templates. You can find it here: <https://pandoc.org/installing.html>
 
 ## LaTex / Word
 
-You'll need a LaTeX distribution to build the pdf files (e.g., MikTex or MacTex), or Microsoft Word to build .docx files.
+You'll need a LaTeX distribution to build the APA formatted pdf files (e.g., MikTex or MacTex), or Microsoft Word to convert markdown to .docx files.
 
 ## Filters
 
@@ -33,19 +33,17 @@ Just copy the `pandoc` and `sublime` directories from this repository wherever y
 ## Visual Studio Code
 
 
-Copy the `.vscode` and `pandoc` directories to where your main markdown file is located. 
-Open the folder containing your markdown file as a vscode workspace. 
-Press `Ctrl+Shift+B` to run the build task or press `F1` then type `task`, select "run task", then choose one of the Pandoc options.
+Copy the `.vscode` and `pandoc` directories to where your main markdown file is located.
+Open the folder containing your markdown file as a vscode workspace.
+Press `Ctrl+Shift+B` to run the build task or press `F1` then type `task`, select "run task", then choose one of the Pandoc APA options.
 
 
 ## Pandoc YAML Metadata Block
 
-These templates makes heavy use of the pandoc metadata block at the beginning of your document. I've also provided a snippet you can use to insert the metadata and fill in what is needed (Tools > Snippets). Most of the commands used in the `apa6` package are fields that can be used in the YAML header. See documentation for more details: <https://www.ctan.org/pkg/apa6?lang=en>. Fields used in this template are:
+These templates makes heavy use of the pandoc metadata block at the beginning of your document. I've also provided a snippet you can use to insert the metadata and fill in what is needed (Tools > Snippets). Most of the commands used in the `apa6` package are fields that can be used in the YAML header. See documentation for more details: <http://mirror.hmc.edu/ctan/macros/latex/contrib/apa6/apa6.pdf>. Fields used in this template are:
 
 - `mode`
     - Set to `man: true`, `doc: true`, or `jou: true`
-- `classoption`
-    - A list of options that the `apa6` package will understand. See manual. Don't use `jou`, `man`, or `doc` options here. Use the dedicated YAML field `mode` instead. If the field isn't used, it defaults to manuscript mode. Also the `longtable` option is already specified since it's necessary for pandoc to work with tables. Don't put it twice.
 - `title`
     - Main title of the document. Consistent with the pandoc variable.
 - `subtitle`
@@ -62,9 +60,16 @@ These templates makes heavy use of the pandoc metadata block at the beginning of
     - Location of your bibtex references file, whatever pandoc-citeproc will read. Can add multiple fields for multiple files.
 - `date`
     - Place anything typed here as you would in the `\note{}` apa6 latex command.
-- `joucommands` (optional).
-    - If you are in journal mode and want to use the other journal commands as seen in the example YAML header, add them here. See apa6 manual for list of commands.
 - `keywords`
     - List of keywords that will show under the abstract. See YAML metadata example.
 - `abstract`
     - The abstract text of the manuscript.
+- `classoption` (optional)
+    - A list of options that the `apa6` package will understand. See link to manual above. Don't use the LaTeX options `jou`, `man`, or `doc` here. Use the dedicated YAML field `mode` instead. If the field isn't used, it defaults to manuscript mode. Also the `longtable` option is already specified since it's necessary for pandoc to work with tables. Don't enter it twice.
+- `joucommands` (optional).
+    - If you are in journal mode and want to use the other journal commands, the commands are as follows (also see the link to the apa6 manual for more details).
+    - `leftheader`
+    - `journal`
+    - `volume`
+    - `ccoppy`
+    - `copnum`

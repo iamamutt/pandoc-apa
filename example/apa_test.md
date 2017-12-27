@@ -1,13 +1,7 @@
 ---
-# This is a comment, you may delete them and/or delete fields that you don't use
+# This is a comment, you may remove fields that you don't use. Not all options are shown below. See `README.md`.
 mode:                         # enter only one of three document types, defaults to
     doc: true                 #   man:, jou:, or doc:
-joucommands:                  # this field and subfields can be removed if not using jou
-    leftheader:               # see apa6.pdf for details
-    journal:
-    volume:
-    ccoppy:
-    copnum:
 title: Writing an APA manuscript from Pandoc markdown
 subtitle: APA from markdown
 author:                       # author list, each item is a group of authors
@@ -16,16 +10,17 @@ author:                       # author list, each item is a group of authors
 institute:                    # institute list
     - Institute 1             # for Authors 1 and 2
     - Institute 2             # for Author 3
-twogroups: true               # authors span two universities, other fields: threegroups, ..., sixgroups
+twogroups: true               # since authors span two universities, using twogroups
+                              #   other fields: threegroups, ..., sixgroups
 bibliography:
-    - example/references.bib  # delete field if not using references
-date: "Last updated: \\today" # optional, can delete if not needed
+    - example/references.bib  # delete bibliography field if not citing
+date: "Last updated: \\today" # data is optional, can delete if not needed
 keywords:                     # enter as many keywords as needed
     - sublime text
     - vscode
     - pandoc
     - apa6
-authornote: |                 # author notes are multiline text (optional)
+authornote: |                 # author notes (optional) are multiline text
     \noindent Correspondence:
 
     Joseph M. Burling
@@ -167,6 +162,14 @@ Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec egestas sit a
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec egestas sit amet, convallis a felis. Praesent dictum nec mauris quis molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien tempor risus, quis congue sapien turpis et justo. Suspendisse potenti. Duis viverra aliquet metus, eget aliquam tellus mollis imperdiet.
 
 Nullam nec est ut mauris eleifend pulvinar ac in nisl. In eleifend, velit et rhoncus pretium, justo lectus viverra enim, nec feugiat ante mauris vitae magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi felis nulla, iaculis dapibus sapien quis, pretium laoreet est. Mauris vel sapien tempor, dapibus ipsum sit amet, sagittis tellus. Aliquam ipsum metus, ultricies eleifend dolor nec, ultricies mollis sapien. Integer placerat ante condimentum sagittis elementum. Fusce aliquam, libero a iaculis eleifend, ipsum ante tincidunt ante, ut bibendum dolor risus ut nibh. Sed fermentum tellus id ligula sodales, ut condimentum tortor tempus. Phasellus suscipit dapibus est sed consectetur.
+
+####### Heading 7
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+######## Heading 8
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
 \newpage
 
