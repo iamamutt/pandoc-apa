@@ -42,7 +42,8 @@
                 "--csl=${workspaceRoot}/pandoc/apa.csl",
                 "--template=${workspaceRoot}/pandoc/apa_template.tex",
                 "--standalone"
-            ]
+            ],
+            "problemMatcher": []
         },
         {
             "taskName": "APA DOCX",
