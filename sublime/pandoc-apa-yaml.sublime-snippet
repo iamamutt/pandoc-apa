@@ -1,46 +1,40 @@
 <snippet>
     <content><![CDATA[
 ---
-# This is a comment, you may delete them and/or delete fields that you don't use
-mode:                         # enter only one of three document types, defaults to man:
-    man: true                 # man:, jou:, or doc:
-joucommands:                  # this field and subfields can be removed if not using jou
-    leftheader:               # see apa6.pdf for details
+mode:
+    #man: true
+    #doc: true
+    #jou: true
+title: My Manuscript
+subtitle: Manuscript
+author:
+    - Author 1, Author 2
+    - Author 3
+institute:
+    - Institute 1
+    - Institute 2
+twogroups: true
+#bibliography:
+#	- myref.bib
+date:
+joucommands:
+    leftheader:
     journal:
     volume:
     ccoppy:
     copnum:
-title: My Manuscript          # main title
-subtitle: Manuscript          # running head
-author:                       # author list, each item is a group of authors
-    - Author 1, Author 2      # these go with institute 1
-    - Author 3                # these go with institute 2
-institute:                    # institute list
-    - Institute 1             # for Authors 1 and 2
-    - Institute 2             # for Author 3
-twogroups: true               # authors span two universities, other fields: threegroups, ..., sixgroups
-bibliography:                 # filename.bib, otherwise delete field if not using references!!!
-date:                         # optional, can delete if not needed
-keywords:                     # enter as many keywords as needed
+keywords:
     - keyword1
     - keyword2
     - keyword3
-authornote: |                 # author notes are multiline text (optional)
-    \noindent Correspondence:
+authornote: |
+    \\noindent Correspondence:
 
-    Joseph M. Burling
-
-    Department of Psychology
-
-    6538 Franz Hall, UCLA
-
-    Los Angeles, CA 90095-1563
-
-    Email: jmburling@ucla.edu
-abstract: |                   # abstract text on next few lines, always indented.
+    Email: email@x.edu
+abstract: |
     Abstract text goes here.
 ---
 ]]></content>
-<description>Insert Pandoc APA6 yaml metadata template</description>
+<description>Insert Pandoc APA6 yaml metadata</description>
 <tabTrigger>apayaml</tabTrigger>
 </snippet>

@@ -97,7 +97,7 @@
             "args": [
                 "${file}",
                 "--from=docx",
-                "--to=markdown+hard_line_breaks-tex_math_single_backslash-tex_math_double_backslash",
+                "--to=markdown+hard_line_breaks-tex_math_single_backslash-tex_math_double_backslash+smart",
                 "--output=${fileDirname}/${fileBasenameNoExtension}_docx2md.md",
                 "--track-changes=accept"
             ],

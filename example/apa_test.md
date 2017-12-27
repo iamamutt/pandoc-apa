@@ -1,8 +1,7 @@
-
 ---
 # This is a comment, you may delete them and/or delete fields that you don't use
-mode:                         # enter only one of three document types, defaults to man:
-    doc: true                 # man:, jou:, or doc:
+mode:                         # enter only one of three document types, defaults to
+    doc: true                 #   man:, jou:, or doc:
 joucommands:                  # this field and subfields can be removed if not using jou
     leftheader:               # see apa6.pdf for details
     journal:
@@ -18,8 +17,8 @@ institute:                    # institute list
     - Institute 1             # for Authors 1 and 2
     - Institute 2             # for Author 3
 twogroups: true               # authors span two universities, other fields: threegroups, ..., sixgroups
-bibliography:                 # delete field if not using references!!!
-    - example/references.bib  
+bibliography:
+    - example/references.bib  # delete field if not using references
 date: "Last updated: \\today" # optional, can delete if not needed
 keywords:                     # enter as many keywords as needed
     - sublime text
@@ -64,7 +63,7 @@ Age & Frequency \\ \hline
 ```
 
 
-![Your figure caption goes here.](example/plot.png "A title"){#fig:myplot width=3in}
+![Your figure caption goes here.](example/plot.png "A title"){#fig:myplot height=3.333in width=3.333in}
 
 
 See Table {@tbl:mytable} for an example on making tables using the default extension. In APA man mode, Tables are sent to the end of the document unless the following is used in the YAML header at the top of this document:
