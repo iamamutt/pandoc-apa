@@ -13,7 +13,7 @@ institute:                    # institute list
 twogroups: true               # since authors span two universities, using twogroups
                               #   other fields: threegroups, ..., sixgroups
 bibliography:
-    - example/references.bib  # delete bibliography field if not citing
+    - references.bib          # delete bibliography field if not citing
 date: "Last updated: \\today" # data is optional, can delete if not needed
 keywords:                     # enter as many keywords as needed
     - sublime text
@@ -58,7 +58,7 @@ Age & Frequency \\ \hline
 ```
 
 
-![Your figure caption goes here.](example/plot.png "A title"){#fig:myplot height=3.333in width=3.333in}
+![Your figure caption goes here.](plot.png "A title"){#fig:myplot height=3.333in width=3.333in}
 
 
 See Table {@tbl:mytable} for an example on making tables using the default extension. In APA man mode, Tables are sent to the end of the document unless the following is used in the YAML header at the top of this document:
