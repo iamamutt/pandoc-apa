@@ -37,6 +37,21 @@ Copy the `.vscode` and `pandoc` directories to where your main markdown file is 
 Open the folder containing your markdown file as a vscode workspace.
 Press `Ctrl+Shift+B` to run the build task or press `F1` then type `task`, select "run task", then choose one of the Pandoc APA options.
 
+Instead of copying the pandoc-apa contents for each project, you can now create a workspace with multiple root folders in vs code. Just make a `.code-workspace` file where your main .md file is located with something like this, where the second path is pointing to the pandoc-apa directory:
+
+```
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../pandoc-apa"
+		}
+	],
+	"settings": {}
+}
+```
 
 ## Pandoc YAML Metadata Block
 
