@@ -40,3 +40,9 @@
 *.alg
 *.loa
 **/.jsbeautifyrc
+
+## Pandoc
+tex2pdf*
+examples/tex2pdf*
+pandoc/default.tex
+**/~$apa*
