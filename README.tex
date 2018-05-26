@@ -1,0 +1,412 @@
+% options for packages loaded elsewhere
+\PassOptionsToPackage{unicode=true}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+
+% apa6 mode and class options
+\documentclass[,longtable]{apa6}
+
+% for mode selection options
+\usepackage{ifthen}
+
+% setup mode ifs
+\newif\ifmanmode
+\newif\ifdocmode
+\newif\ifjoumode
+\ifthenelse{\equal{\string }{\string man}}{
+    \manmodetrue
+}{
+    \ifthenelse{\equal{\string }{\string doc}}{
+        \docmodetrue
+    }{
+        \ifthenelse{\equal{\string }{\string jou}}{
+            \joumodetrue
+        }{
+% None
+}}}
+
+% man mode uses the endfloat package,
+% this will try to set tables and figures at the end for longtables too
+\ifmanmode
+\DeclareDelayedFloatFlavor{longtable}{table}
+\fi
+
+% other packages
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+
+% handle different types of tex engines
+% if pdftex
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+% if luatex or xelatex
+\else
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+
+% other language options
+\usepackage[american]{babel}
+\usepackage{csquotes}
+\usepackage{microtype}
+
+% disable microtype protrusion for tt fonts
+\UseMicrotypeSet[protrusion]{basicmath}
+
+\usepackage{graphicx,grffile}
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Pandoc stuff
+\let\tightlist\relax % empty pandoc tight list command
+
+% Hyperlinks and other metadata in pdf
+\usepackage{hyperref}
+\hypersetup{
+            colorlinks=false,
+            linkcolor=Black,
+            citecolor=Black,
+            urlcolor=Black,
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same} % don't use monospace font for urls
+
+
+
+
+
+
+\title{~}\shorttitle{~}\author{~}\affiliation{~}
+
+
+
+
+
+\ifdocmode
+\usepackage{longtable}
+\fi
+
+\ifjoumode
+% Journal specific commands may go here:
+% two column long table. has to be done at the end
+\usepackage{longtable}
+\makeatletter
+\let\oldlt\longtable
+\let\endoldlt\endlongtable
+\def\longtable{\@ifnextchar[\longtable@i \longtable@ii}
+\def\longtable@i[#1]{%
+
+\begin{figure}[btph]\onecolumn \begin{minipage}{0.5\textwidth} \oldlt[#1]}
+\def\longtable@ii{\begin{figure}[btph]\onecolumn \begin{minipage}{0.5\textwidth} \oldlt}
+\def\endlongtable{%
+\endoldlt
+\end{minipage}
+
+\twocolumn
+\end{figure}}
+\makeatother
+\fi
+
+% table caption width
+\makeatletter
+\newcommand\LastLTentrywidth{1em}
+\newlength\longtablewidth
+\setlength{\longtablewidth}{1in}
+\newcommand\getlongtablewidth{%
+\begingroup
+\ifcsname LT@\roman{LT@tables}\endcsname
+\global\longtablewidth=0pt
+\renewcommand\LT@entry[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}%
+\@nameuse{LT@\roman{LT@tables}}%
+\fi
+\endgroup}
+
+
+\begin{document}
+
+
+\hypertarget{pandoc-apa}{%
+\section{pandoc-apa}\label{pandoc-apa}}
+
+A Sublime Text build system / Visual Studio Code task runner for writing
+APA manuscripts with Pandoc formatted markdown
+
+\hypertarget{installation}{%
+\section{Installation}\label{installation}}
+
+\hypertarget{pandoc}{%
+\subsection{Pandoc}\label{pandoc}}
+
+You need Pandoc to use the pandoc templates. You can find it here:
+\url{https://pandoc.org/installing.html}
+
+\hypertarget{latex-word}{%
+\subsection{LaTex / Word}\label{latex-word}}
+
+You'll need a LaTeX distribution to build the APA formatted pdf files
+(e.g., MikTex or MacTex), or Microsoft Word to convert markdown to .docx
+files.
+
+\hypertarget{filters}{%
+\subsection{Filters}\label{filters}}
+
+Pandoc doesn't yet support cross referencing figures and tables. You'll
+need a Python distribution to install two filters to be able to do this.
+The filters are \texttt{pandoc-fignos} and \texttt{pandoc-tablenos}. You
+can find links and installation instructions here
+\url{https://github.com/tomduck/pandoc-fignos}
+
+\hypertarget{usage}{%
+\section{Usage}\label{usage}}
+
+\hypertarget{sublime-text}{%
+\subsection{Sublime Text}\label{sublime-text}}
+
+Copy the \texttt{pandoc} and \texttt{sublime} directories from this
+repository wherever your Packages folder is located in Sublime Text. For
+example, if the contents are not already in a folder called
+\texttt{pandoc-apa}, make a folder called \texttt{pandoc-apa} and copy
+contents here if on Windows:
+\texttt{C:\textbackslash{}Users\textbackslash{}username\textbackslash{}AppData\textbackslash{}Roaming\textbackslash{}Sublime\ Text\ 3\textbackslash{}Packages\textbackslash{}User\textbackslash{}pandoc-apa}.
+
+\begin{itemize}
+\item
+  Press \texttt{ctrl\ +\ b} to build to pdf (or \texttt{cmd+b})
+\item
+  Press \texttt{ctrl\ +\ shift\ +\ b} to build to docx (or
+  \texttt{cmd+shift+b})
+\item
+  You can also go to
+  \texttt{Tools\ \textgreater{}\ Build\ System\ \textgreater{}\ Pandoc\ APA},
+  then if you select \texttt{Tools\ \textgreater{}\ Build\ Width} you
+  can see the different options. Default is .pdf.
+  \texttt{Markdown\ to\ LaTeX} will convert a pandoc markdown document
+  to a .tex file. \texttt{Run} will convert to .docx.
+\item
+  In a document, type \texttt{apayaml}, then press Tab. It will generate
+  a YAML header. Or you can do this from
+  \texttt{Tools\ \textgreater{}\ Snippets\ \textgreater{}\ "Insert\ Pandoc\ ..."}
+\end{itemize}
+
+\hypertarget{visual-studio-code}{%
+\subsection{Visual Studio Code}\label{visual-studio-code}}
+
+Copy the \texttt{.vscode} and \texttt{pandoc} directories to where your
+main markdown file is located. Open the folder containing your markdown
+file as a vscode workspace. Press \texttt{Ctrl+Shift+B} to run the build
+task or press \texttt{F1} then type \texttt{task}, select \enquote{run
+task}, then choose one of the Pandoc APA options.
+
+Instead of copying the pandoc-apa contents for each project, you can now
+create a workspace with multiple root folders in vs code. Make a
+\texttt{.code-workspace} file where your main .md file is located with
+something like this, where the second path is pointing to the pandoc-apa
+directory:
+
+\begin{verbatim}
+{
+    "folders": [
+        {
+            "path": "."
+        },
+        {
+            "path": "../pandoc-apa"
+        }
+    ],
+    "settings": {
+        "files.exclude": {
+            "example": true
+        }
+    }
+}
+\end{verbatim}
+
+\hypertarget{pandoc-yaml-metadata-block}{%
+\subsection{Pandoc YAML Metadata
+Block}\label{pandoc-yaml-metadata-block}}
+
+These templates makes heavy use of the pandoc metadata block at the
+beginning of your document. I've also provided a snippet you can use to
+insert the metadata and fill in what is needed (Tools \textgreater{}
+Snippets). Most of the commands used in the \texttt{apa6} package are
+fields that can be used in the YAML header. See documentation for more
+details:
+\url{http://mirror.hmc.edu/ctan/macros/latex/contrib/apa6/apa6.pdf}.
+Fields used in this template are:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{mode}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Set to \texttt{man}, \texttt{doc}, or \texttt{jou}. This is the only
+    \emph{absolutely} necessary option to generate a file with no
+    errors.
+  \end{itemize}
+\item
+  \texttt{title}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Main title of the document. Consistent with the pandoc variable.
+  \end{itemize}
+\item
+  \texttt{subtitle}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Running head title. Consistent with the pandoc variable.
+  \end{itemize}
+\item
+  \texttt{author}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    List of authors. Put multiple authors on one line to group by
+    affiliation. Consistent with the pandoc variable.
+  \end{itemize}
+\item
+  \texttt{institute}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    List of affiliations. Won't work with docx. You have to add this
+    manually.
+  \end{itemize}
+\item
+  \texttt{twogroups}, \texttt{threegroups}, \ldots{} ,
+  \texttt{sixgroups}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Set one of these to true if grouping authors by different
+    affiliations, as in the twogroup YAML example. If anyone of these
+    options are not set, it will use the standard
+    \texttt{\textbackslash{}author\{\}} command.
+  \end{itemize}
+\item
+  \texttt{authornote}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A note that will be placed at the bottom of the title page, or
+    footnote if in \texttt{jou} mode.
+  \end{itemize}
+\item
+  \texttt{bibliography}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Location of your bibtex references file, whatever pandoc-citeproc
+    will read. Can add multiple fields for multiple files.
+  \end{itemize}
+\item
+  \texttt{date}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Place anything typed here as you would in the
+    \texttt{\textbackslash{}note\{\}} apa6 latex command.
+  \end{itemize}
+\item
+  \texttt{keywords}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    List of keywords that will show under the abstract. See YAML
+    metadata example.
+  \end{itemize}
+\item
+  \texttt{abstract}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The abstract text of the manuscript.
+  \end{itemize}
+\item
+  \texttt{floatsintext} (optional)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If this field is present and set to \texttt{true}, it will keep
+    figures and tables with text or at the end of the document.
+  \end{itemize}
+\item
+  \texttt{classoption} (optional)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A list of options that the \texttt{apa6} package will understand.
+    See link to manual above. Don't use the LaTeX options \texttt{jou},
+    \texttt{man}, or \texttt{doc} here. Use the dedicated YAML field
+    \texttt{mode} instead. If the field isn't used, it defaults to
+    manuscript mode. Also the \texttt{longtable} option is already
+    specified since it's necessary for pandoc to work with tables. Don't
+    enter it twice. Some useful options may be \texttt{noextraspace},
+    \texttt{draftfirst}, etc\ldots{}
+  \end{itemize}
+\item
+  \texttt{joucommands} (optional)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If you are in journal mode and want to use the other journal
+    commands, the commands are as follows (also see the link to the apa6
+    manual for more details).
+  \item
+    \texttt{leftheader}
+  \item
+    \texttt{journal}
+  \item
+    \texttt{volume}
+  \item
+    \texttt{ccoppy}
+  \item
+    \texttt{copnum}
+  \end{itemize}
+\item
+  \texttt{colorlinks} (optional)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Colorize links and citations.
+  \end{itemize}
+\end{itemize}
+
+You can try additional fields not mentioned here:
+
+\url{https://pandoc.org/MANUAL.html\#variables-set-by-pandoc}
+
+
+
+\end{document}

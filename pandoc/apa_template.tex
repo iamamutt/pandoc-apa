@@ -1,62 +1,155 @@
-$if(mode.jou)$
-% Journal mode
-\documentclass[$if(classoption)$$for(classoption)$$classoption$$sep$,$endfor$,jou,longtable$else$jou,longtable$endif$]{apa6}
-\usepackage{longtable}
-\makeatletter % two-column longtables for journal mode
-\let\saved@longtable\longtable
-\long\def\foo#1\LT@err#2#3#4!!{\def\longtable{#1#4}}
-\expandafter\foo\longtable!!
-\long\def\foo#1\@outputpage#2\@outputpage#3!!{
-\def\LT@output{#1\@opcol#2\@opcol#3}}
-\expandafter\foo\LT@output!!
-\makeatother
-% Journal specific commands may go here:
-$if(joucommands.leftheader)$
-\leftheader{$joucommands.leftheader$}$endif$
-$if(joucommands.journal)$
-\journal{$joucommands.journal$}$endif$
-$if(joucommands.volume)$
-\volume{$joucommands.volume$}$endif$
-$if(joucommands.ccoppy)$
-\ccoppy{$joucommands.ccoppy$}$endif$
-$if(joucommands.copnum)$
-\copnum{$joucommands.copnum$}$endif$
-$else$$if(mode.man)$
-% Manuscript mode
-\documentclass[$if(classoption)$$for(classoption)$$classoption$$sep$,$endfor$,man,longtable$else$man,longtable$endif$]{apa6}
+% options for packages loaded elsewhere
+\PassOptionsToPackage{unicode=true}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+$if(colorlinks)$
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
+$endif$
+
+% apa6 mode and class options
+\documentclass[$if(classoption)$$mode$,longtable,$for(classoption)$$classoption$$sep$,$endfor$$else$$mode$,longtable$endif$$if(floatsintext)$,floatsintext$endif$]{apa6}
+
+% for mode selection options
+\usepackage{ifthen}
+
+% setup mode ifs
+\newif\ifmanmode
+\newif\ifdocmode
+\newif\ifjoumode
+\ifthenelse{\equal{\string $mode$}{\string man}}{
+    \manmodetrue
+}{
+    \ifthenelse{\equal{\string $mode$}{\string doc}}{
+        \docmodetrue
+    }{
+        \ifthenelse{\equal{\string $mode$}{\string jou}}{
+            \joumodetrue
+        }{
+% None
+}}}
+
+$if(floatsintext)$
+% floatsintext
+$else$
 % man mode uses the endfloat package,
 % this will try to set tables and figures at the end for longtables too
-% keeping longtables with text won't work though
+\ifmanmode
 \DeclareDelayedFloatFlavor{longtable}{table}
-$else$$if(mode.doc)$
-% Document mode
-\documentclass[$if(classoption)$$for(classoption)$$classoption$$sep$,$endfor$,doc,longtable$else$doc,longtable$endif$]{apa6}
-\usepackage{longtable}
-$else$
-% Manuscript mode
-\documentclass[$if(classoption)$$for(classoption)$$classoption$$sep$,$endfor$,man,longtable$else$man,longtable$endif$]{apa6}
-\DeclareDelayedFloatFlavor{longtable}{table}
-$endif$$endif$$endif$
+\fi
+$endif$
+
+% other packages
 \usepackage{lmodern}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+
+% handle different types of tex engines
+% if pdftex
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0
+  \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+% if luatex or xelatex
+\else
+$if(mathspec)$
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{unicode-math}
+  \fi
+$else$
+  \usepackage{unicode-math}
+$endif$
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+$for(fontfamilies)$
+  \newfontfamily{$fontfamilies.name$}[$fontfamilies.options$]{$fontfamilies.font$}
+$endfor$
+$if(mainfont)$
+    \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
+$endif$
+$if(sansfont)$
+    \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
+$endif$
+$if(monofont)$
+    \setmonofont[Mapping=tex-ansi$if(monofontoptions)$,$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$endif$]{$monofont$}
+$endif$
+$if(mathfont)$
+$if(mathspec)$
+  \ifxetex
+    \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
+  \else
+    \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
+  \fi
+$else$
+  \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
+$endif$
+$endif$
+$if(CJKmainfont)$
+  \ifxetex
+    \usepackage{xeCJK}
+    \setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
+  \fi
+$endif$
+$if(luatexjapresetoptions)$
+  \ifluatex
+    \usepackage[$for(luatexjapresetoptions)$$luatexjapresetoptions$$sep$,$endfor$]{luatexja-preset}
+  \fi
+$endif$
+$if(CJKmainfont)$
+  \ifluatex
+    \usepackage[$for(luatexjafontspecoptions)$$luatexjafontspecoptions$$sep$,$endfor$]{luatexja-fontspec}
+    \setmainjfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
+  \fi
+$endif$
+\fi
+
+% other language options
+$if(lang)$
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[shorthands=off,$for(babel-otherlangs)$$babel-otherlangs$,$endfor$main=$babel-lang$]{babel}
+$if(babel-newcommands)$
+  $babel-newcommands$
+$endif$
+\else
+  % load polyglossia as late as possible as it *could* call bidi if RTL lang (e.g. Hebrew or Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[$polyglossia-lang.options$]{$polyglossia-lang.name$}
+$for(polyglossia-otherlangs)$
+  \setotherlanguage[$polyglossia-otherlangs.options$]{$polyglossia-otherlangs.name$}
+$endfor$
+\fi
+$else$
 \usepackage[american]{babel}
+$endif$
 \usepackage{csquotes}
 \usepackage{microtype}
-\usepackage{amsmath,amssymb}
-\usepackage{graphicx}
+
+% disable microtype protrusion for tt fonts
+\UseMicrotypeSet[protrusion]{basicmath}
+
+\usepackage{graphicx,grffile}
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+
 \usepackage{booktabs}
 \usepackage{caption}
 \usepackage{subcaption}
-\usepackage[unicode=true]{hyperref}
+$if(colorlinks)$
+\usepackage{xcolor}
+$endif$
 
 % Pandoc stuff
-\UseMicrotypeSet[protrusion]{basicmath}
 \let\tightlist\relax % empty pandoc tight list command
-\urlstyle{same} % url non-monotype
 
 % Hyperlinks and other metadata in pdf
-\hypersetup{unicode=true,
+\usepackage{hyperref}
+\hypersetup{
 $if(title-meta)$
             pdftitle={$title-meta$},
 $endif$
@@ -68,17 +161,35 @@ $if(keywords)$
 $endif$
 $if(colorlinks)$
             colorlinks=true,
-            linkcolor=$if(linkcolor)$$linkcolor$$else$blue$endif$,
-            citecolor=$if(citecolor)$$citecolor$$else$blue$endif$,
-            urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
+            linkcolor=$if(linkcolor)$$linkcolor$$else$Blue$endif$,
+            citecolor=$if(citecolor)$$citecolor$$else$Blue$endif$,
+            urlcolor=$if(urlcolor)$$urlcolor$$else$Blue$endif$,
 $else$
+            colorlinks=false,
+            linkcolor=Black,
+            citecolor=Black,
+            urlcolor=Black,
             pdfborder={0 0 0},
-            colorlinks=true,
-            linkcolor=blue,
-            citecolor=blue,
-            urlcolor=blue,
 $endif$
             breaklinks=true}
+\urlstyle{same} % don't use monospace font for urls
+
+$if(links-as-notes)$
+% Make links footnotes instead of hotlinks:
+\DeclareRobustCommand{\href}[2]{#2\footnote{\url{#1}}}$endif$
+
+$if(listings)$
+\usepackage{listings}
+\newcommand{\passthrough}[1]{#1}$endif$
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+$if(strikeout)$
+\usepackage[normalem]{ulem}
+% avoid problems with \sout in headers with hyperref:
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}$endif$
 
 $if(bibliography)$
 % References
@@ -138,13 +249,11 @@ $if(authornote)$
 $authornote$
 }$endif$
 
-
 $if(abstract)$
 % Abstract page
 \abstract{%
 $abstract$
 }$endif$
-
 
 $if(keywords)$
 \keywords{$for(keywords)$$keywords$$sep$, $endfor$}$endif$
@@ -154,6 +263,56 @@ $for(include-before)$
 $include-before$
 
 $endfor$
+
+\ifdocmode
+\usepackage{longtable}
+\fi
+
+\ifjoumode
+% Journal specific commands may go here:
+$if(joucommands.leftheader)$
+\leftheader{$joucommands.leftheader$}$endif$
+$if(joucommands.journal)$
+\journal{$joucommands.journal$}$endif$
+$if(joucommands.volume)$
+\volume{$joucommands.volume$}$endif$
+$if(joucommands.ccoppy)$
+\ccoppy{$joucommands.ccoppy$}$endif$
+$if(joucommands.copnum)$
+\copnum{$joucommands.copnum$}$endif$
+% two column long table. has to be done at the end
+\usepackage{longtable}
+\makeatletter
+\let\oldlt\longtable
+\let\endoldlt\endlongtable
+\def\longtable{\@ifnextchar[\longtable@i \longtable@ii}
+\def\longtable@i[#1]{%
+
+\begin{figure}[btph]\onecolumn \begin{minipage}{0.5\textwidth} \oldlt[#1]}
+\def\longtable@ii{\begin{figure}[btph]\onecolumn \begin{minipage}{0.5\textwidth} \oldlt}
+\def\endlongtable{%
+\endoldlt
+\end{minipage}
+
+\twocolumn
+\end{figure}}
+\makeatother
+\fi
+
+% table caption width
+\makeatletter
+\newcommand\LastLTentrywidth{1em}
+\newlength\longtablewidth
+\setlength{\longtablewidth}{1in}
+\newcommand\getlongtablewidth{%
+\begingroup
+\ifcsname LT@\roman{LT@tables}\endcsname
+\global\longtablewidth=0pt
+\renewcommand\LT@entry[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}%
+\@nameuse{LT@\roman{LT@tables}}%
+\fi
+\endgroup}
+
 
 \begin{document}
 $if(title)$\maketitle$endif$
@@ -168,5 +327,12 @@ $for(include-after)$
 $include-after$
 
 $endfor$
+
+$if(lot)$
+\listoftables
+$endif$
+$if(lof)$
+\listoffigures
+$endif$
 
 \end{document}

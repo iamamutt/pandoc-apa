@@ -1,108 +1,112 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
-    "type": "shell",
-    "presentation":
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "type": "shell",
+  "presentation": {
+    "reveal": "silent",
+    "focus": false,
+    "echo": true,
+    "panel": "dedicated"
+  },
+  "options": {
+    "cwd": "${fileDirname}"
+  },
+  "tasks": [
     {
-        "reveal": "silent",
-        "focus": false,
-        "echo": true,
-        "panel": "dedicated"
-    },
-    "options":
-    {
-        "cwd": "${fileDirname}"
-    },
-    "tasks": [
-    {
-        "label": "Pandoc test",
-        "group": "build",
-        "command": "pandoc",
-        "args": ["-v"],
-        "problemMatcher": []
+      "label": "Pandoc test",
+      "group": "build",
+      "command": "pandoc",
+      "args": ["-v"],
+      "problemMatcher": []
     },
     {
-        "label": "APA PDF",
-        "group":
-        {
-            "kind": "build",
-            "isDefault": true
-        },
-        "command": "pandoc",
-        "args": ["${file}",
-            "--from=markdown",
-            "--to=latex",
-            "--output=${fileDirname}/${fileBasenameNoExtension}.pdf",
-            "--smart",
-            "--filter=pandoc-fignos",
-            "--filter=pandoc-tablenos",
-            "--filter=pandoc-citeproc",
-            "--csl=${workspaceRoot}/pandoc/apa.csl",
-            "--template=${workspaceRoot}/pandoc/apa_template.tex",
-            "--standalone"
-        ],
-        "problemMatcher": []
+      "label": "APA PDF",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "command": "pandoc",
+      "args": [
+        "${file}",
+        "--from=markdown",
+        "--to=latex",
+        "--output=${fileDirname}/${fileBasenameNoExtension}.pdf",
+        "--filter=pandoc-fignos",
+        "--filter=pandoc-tablenos",
+        "--filter=pandoc-citeproc",
+        "--csl=${workspaceRoot}/pandoc/apa.csl",
+        "--template=${workspaceRoot}/pandoc/apa_template.tex",
+        "--standalone"
+      ],
+      "problemMatcher": []
     },
     {
-        "label": "APA DOCX",
-        "group": "build",
-        "command": "pandoc",
-        "args": ["${file}",
-            "--from=markdown",
-            "--to=docx",
-            "--output=${fileDirname}/${fileBasenameNoExtension}.docx",
-            "--dpi=300",
-            "--smart",
-            "--filter=pandoc-fignos",
-            "--filter=pandoc-tablenos",
-            "--filter=pandoc-citeproc",
-            "--csl=${workspaceRoot}/pandoc/apa.csl",
-            "--reference-doc=${workspaceRoot}/pandoc/apa.docx"
-        ],
-        "problemMatcher": []
+      "label": "APA DOCX",
+      "group": "build",
+      "command": "pandoc",
+      "args": [
+        "${file}",
+        "--from=markdown",
+        "--to=docx+smart",
+        "--output=${fileDirname}/${fileBasenameNoExtension}.docx",
+        "--dpi=300",
+        "--filter=pandoc-fignos",
+        "--filter=pandoc-tablenos",
+        "--filter=pandoc-citeproc",
+        "--csl=${workspaceRoot}/pandoc/apa.csl",
+        "--reference-doc=${workspaceRoot}/pandoc/apa.docx"
+      ],
+      "problemMatcher": []
     },
     {
-        "label": "APA DOCX-RAW",
-        "group": "build",
-        "command": "pandoc",
-        "args": ["${file}",
-            "--from=markdown",
-            "--to=docx-citations",
-            "--output=${fileDirname}/${fileBasenameNoExtension}_raw.docx",
-            "--dpi=300",
-            "--reference-doc=${workspaceRoot}/pandoc/apa.docx"
-        ],
-        "problemMatcher": []
+      "label": "APA DOCX-RAW",
+      "group": "build",
+      "command": "pandoc",
+      "args": [
+        "${file}",
+        "--from=markdown",
+        "--to=docx-citations",
+        "--output=${fileDirname}/${fileBasenameNoExtension}_raw.docx",
+        "--dpi=300",
+        "--reference-doc=${workspaceRoot}/pandoc/apa.docx"
+      ],
+      "problemMatcher": []
     },
     {
-        "label": "APA TEX",
-        "group": "build",
-        "command": "pandoc",
-        "args": ["${file}",
-            "--from=markdown",
-            "--to=latex",
-            "--output=${fileDirname}/${fileBasenameNoExtension}.tex",
-            "--filter=pandoc-fignos",
-            "--filter=pandoc-tablenos",
-            "--filter=pandoc-citeproc",
-            "--csl=${workspaceRoot}/pandoc/apa.csl",
-            "--template=${workspaceRoot}/pandoc/apa_template.tex",
-            "--standalone",
-            "--biblatex"
-        ],
-        "problemMatcher": []
+      "label": "APA TEX",
+      "group": "build",
+      "command": "pandoc",
+      "args": [
+        "${file}",
+        "--from=markdown",
+        "--to=latex",
+        "--output=${fileDirname}/${fileBasenameNoExtension}.tex",
+        "--filter=pandoc-fignos",
+        "--filter=pandoc-tablenos",
+        "--filter=pandoc-citeproc",
+        "--csl=${workspaceRoot}/pandoc/apa.csl",
+        "--template=${workspaceRoot}/pandoc/apa_template.tex",
+        "--standalone",
+        "--biblatex"
+      ],
+      "problemMatcher": []
     },
     {
-        "label": "DOCX2MD",
-        "group": "build",
-        "command": "pandoc",
-        "args": ["${file}",
-            "--from=docx",
-            "--to=markdown+hard_line_breaks-tex_math_single_backslash-tex_math_double_backslash",
-            "--output=${fileDirname}/${fileBasenameNoExtension}_docx2md.md",
-            "--track-changes=accept"
-        ],
-        "problemMatcher": []
-    }]
+      "label": "DOCX2MD",
+      "group": "build",
+      "command": "pandoc",
+      "args": [
+        "${file}",
+        "--from=docx-smart+styles",
+        "--to=markdown-tex_math_single_backslash-tex_math_double_backslash",
+        "--output=${fileDirname}/${fileBasenameNoExtension}_docx2md.md",
+        "--track-changes=accept",
+        "--wrap=auto",
+        "--columns=98",
+        "--extract-media=${fileDirname}/media/docx"
+      ],
+      "problemMatcher": []
+    }
+  ]
 }

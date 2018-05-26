@@ -20,7 +20,7 @@ Pandoc doesn't yet support cross referencing figures and tables. You'll need a P
 
 ## Sublime Text
 
-Just copy the `pandoc` and `sublime` directories from this repository wherever your Packages folder is located in Sublime Text. For example, if the contents are not already in a folder called `pandoc-apa`, make a folder called `pandoc-apa` and copy contents here if on Windows: `C:\Users\username\AppData\Roaming\Sublime Text 3\Packages\User\pandoc-apa`.
+Copy the `pandoc` and `sublime` directories from this repository wherever your Packages folder is located in Sublime Text. For example, if the contents are not already in a folder called `pandoc-apa`, make a folder called `pandoc-apa` and copy contents here if on Windows: `C:\Users\username\AppData\Roaming\Sublime Text 3\Packages\User\pandoc-apa`.
 
 - Press `ctrl + b` to build to pdf (or `cmd+b`)
 
@@ -32,12 +32,11 @@ Just copy the `pandoc` and `sublime` directories from this repository wherever y
 
 ## Visual Studio Code
 
-
 Copy the `.vscode` and `pandoc` directories to where your main markdown file is located.
 Open the folder containing your markdown file as a vscode workspace.
 Press `Ctrl+Shift+B` to run the build task or press `F1` then type `task`, select "run task", then choose one of the Pandoc APA options.
 
-Instead of copying the pandoc-apa contents for each project, you can now create a workspace with multiple root folders in vs code. Just make a `.code-workspace` file where your main .md file is located with something like this, where the second path is pointing to the pandoc-apa directory:
+Instead of copying the pandoc-apa contents for each project, you can now create a workspace with multiple root folders in vs code. Make a `.code-workspace` file where your main .md file is located with something like this, where the second path is pointing to the pandoc-apa directory:
 
 ```
 {
@@ -49,7 +48,11 @@ Instead of copying the pandoc-apa contents for each project, you can now create 
 			"path": "../pandoc-apa"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.exclude": {
+			"example": true
+		}
+	}
 }
 ```
 
@@ -58,7 +61,7 @@ Instead of copying the pandoc-apa contents for each project, you can now create 
 These templates makes heavy use of the pandoc metadata block at the beginning of your document. I've also provided a snippet you can use to insert the metadata and fill in what is needed (Tools > Snippets). Most of the commands used in the `apa6` package are fields that can be used in the YAML header. See documentation for more details: <http://mirror.hmc.edu/ctan/macros/latex/contrib/apa6/apa6.pdf>. Fields used in this template are:
 
 - `mode`
-    - Set to `man: true`, `doc: true`, or `jou: true`
+    - Set to `man`, `doc`, or `jou`. This is the only *absolutely* necessary option to generate a file with no errors.
 - `title`
     - Main title of the document. Consistent with the pandoc variable.
 - `subtitle`
@@ -66,7 +69,7 @@ These templates makes heavy use of the pandoc metadata block at the beginning of
 - `author`
     - List of authors. Put multiple authors on one line to group by affiliation. Consistent with the pandoc variable.
 - `institute`
-    - List of affiliations. Won't work with docx. You have to add it manually.
+    - List of affiliations. Won't work with docx. You have to add this manually.
 - `twogroups`, `threegroups`, ... , `sixgroups`
     - Set one of these to true if grouping authors by different affiliations, as in the twogroup YAML example. If anyone of these options are not set, it will use the standard `\author{}` command.
 - `authornote`
@@ -79,12 +82,20 @@ These templates makes heavy use of the pandoc metadata block at the beginning of
     - List of keywords that will show under the abstract. See YAML metadata example.
 - `abstract`
     - The abstract text of the manuscript.
+- `floatsintext` (optional)
+    - If this field is present and set to `true`, it will keep figures and tables with text or at the end of the document.
 - `classoption` (optional)
-    - A list of options that the `apa6` package will understand. See link to manual above. Don't use the LaTeX options `jou`, `man`, or `doc` here. Use the dedicated YAML field `mode` instead. If the field isn't used, it defaults to manuscript mode. Also the `longtable` option is already specified since it's necessary for pandoc to work with tables. Don't enter it twice.
-- `joucommands` (optional).
+    - A list of options that the `apa6` package will understand. See link to manual above. Don't use the LaTeX options `jou`, `man`, or `doc` here. Use the dedicated YAML field `mode` instead. If the field isn't used, it defaults to manuscript mode. Also the `longtable` option is already specified since it's necessary for pandoc to work with tables. Don't enter it twice. Some useful options may be `noextraspace`, `draftfirst`, etc...
+- `joucommands` (optional)
     - If you are in journal mode and want to use the other journal commands, the commands are as follows (also see the link to the apa6 manual for more details).
     - `leftheader`
     - `journal`
     - `volume`
     - `ccoppy`
     - `copnum`
+- `colorlinks` (optional)
+    - Colorize links and citations.
+
+You can try additional fields not mentioned here:
+
+<https://pandoc.org/MANUAL.html#variables-set-by-pandoc>

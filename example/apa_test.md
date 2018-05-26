@@ -1,26 +1,36 @@
 ---
 # This is a comment, you may remove fields that you don't use. Not all options are shown below. See `README.md`.
-mode:                         # enter only one of three document types, defaults to
-    doc: true                 #   man:, jou:, or doc:
-title: Writing an APA manuscript from Pandoc markdown
-subtitle: APA from markdown
-author:                       # author list, each item is a group of authors
-    - Author 1, Author 2      # these go with institute 1
+mode: man                     # enter only one of three document types, man, jou, or doc
+floatsintext: true            # special handling of figures, tables with the text
+classoption:                  # apa6 documentclass options (latex/pdf output)
+    - noextraspace            # other options except floatsintext, man, jou, doc should go here.
+subtitle: Markdown to APA     # running head title
+author:                       # author list, each item is a GROUP of authors
+    - Author 1, Author 2      # these authors go with institute 1
     - Author 3                # these go with institute 2
-institute:                    # institute list
-    - Institute 1             # for Authors 1 and 2
-    - Institute 2             # for Author 3
-twogroups: true               # since authors span two universities, using twogroups
-                              #   other fields: threegroups, ..., sixgroups
-bibliography:
-    - references.bib          # delete bibliography field if not citing
-date: "Last updated: \\today" # data is optional, can delete if not needed
-keywords:                     # enter as many keywords as needed
+institute:                    # institute list, matches author order
+    - Institute 1             # institute for Authors 1 and 2
+    - Institute 2             # institute for Author 3
+twogroups: true               # using the 'twogroups' field since authors span two universities
+                              # this places authors with institutions in the output document
+                              # if the field is missing, will align affiliations vertically
+                              # other fields to use: threegroups, ..., sixgroups
+bibliography:                 # delete bibliography field if not citing anything
+    - references.bib          # use a new line for each .bib file
+date: "Last updated: \\today" # date is optional, can delete if not needed
+keywords:                     # enter as many keywords as needed as a list
     - sublime text
     - vscode
     - pandoc
     - apa6
-authornote: |                 # author notes (optional) are multiline text
+
+# Multi-line YAML fields can be used if they are indented on the next line,
+#  and with a "|" after the field. Two examples are 'authornote', and 'abstract', but
+#  all of these can be on one line if you choose. Multi-line entries can contain LaTeX code,
+#  such as '\noindent'.
+title: |
+    Writing an APA manuscript with Pandoc markdown
+authornote: |
     \noindent Correspondence:
 
     Joseph M. Burling
@@ -32,20 +42,47 @@ authornote: |                 # author notes (optional) are multiline text
     Los Angeles, CA 90095-1563
 
     Email: jmburling@ucla.edu
-abstract: |                   # abstract text on next few lines, always indented.
-    This is just an example of using pandoc (with the help of some build systems) to write in pandoc's markdown syntax for APA manuscripts.
-    The output will be rendered in APA 6 format according to some commands and class options provided by the LaTeX `apa6` package.
-    I also make use of a few pandoc filters downloaded as python modules to get cross-referencing to work.
-    Lastly, I provide a .DOCX version of the build system, though a lot may not translate and will require some additional tweaking.
----
 
+abstract: |
+    This is just an example of using pandoc (with the help of some build systems) to write in pandoc's markdown syntax for APA manuscripts. The output will be rendered in APA 6 format according to some commands and class options provided by the LaTeX `apa6` package. I also make use of a few pandoc filters downloaded as python modules to get cross-referencing to work. Lastly, I provide a .DOCX version of the build system, though a lot may not translate and will require some additional tweaking.
+
+# some styling options
+colorlinks: true
+---
 
 
 # Quick pandoc overview
 
+The YAML metadata block is at the top of the document and take on key-value pairs like so:
+
+```yaml
+---
+# string field with other characters should be quoted
+title: "Some specials: Characters in the title?!?"
+
+# toggle values
+twogroups: true
+
+# nested fields with text
+joucommands:
+    leftheader: some ascii text
+    journal: other text
+
+# lists
+bibliography:
+    - references.bib
+    - other_references.bib
+
+# multiline text
+abstract: |
+    lines go here
+    and here.
+---
+```
+
 Words go here, also here is a citation [@someArticle]. According to @anotherArticle, something bad happened. See Figure @fig:myplot. This is a bold statement... **WOW!**, and here's _some _emphasis for you_ too. Sometimes you need some typewrite-like font, like when writing code: `my_answer = 1 + 1`. Other types you may need to write blocks of code, like this:
 
-```{latex}
+```latex
 \begin{table}
 \centering
 \begin{tabular}{|l|l|}\hline
@@ -61,11 +98,10 @@ Age & Frequency \\ \hline
 ![Your figure caption goes here.](plot.png "A title"){#fig:myplot height=3.333in width=3.333in}
 
 
-See Table {@tbl:mytable} for an example on making tables using the default extension. In APA man mode, Tables are sent to the end of the document unless the following is used in the YAML header at the top of this document:
+See Table @tbl:mytable for an example on making tables using the default extension. If tables are not referenced, then they are not given table numbers and arranged with other tables. In APA man mode, Tables are sent to the end of the document unless the following is used in the YAML header at the top of this document:
 
-```{yaml}
-classoption:
-    - floatsintext
+```yaml
+floatsintext: true
 ```
 
 
@@ -109,9 +145,10 @@ comment
 |               |               | - tasty            |
 +---------------+---------------+--------------------+
 
-Table: And another multi-line table which is more complicated to make. It may requires a pagebreak in two-column (jou) mode because pandoc uses `longtable` which doesn't work in two-column mode.Some additional latex hacks are added to the template to allow it to work (at the risk of losing content or bleeding off the page. Blame pandoc for using `longtable`).
+Table: And another multi-line table which is more complicated to make. It may require a pagebreak in two-column (jou) mode because pandoc uses `longtable` which doesn't work in two-column mode. It has no reference so it doesn't start with "Table x." Some additional latex hacks are added to the template to allow it to work (at the risk of losing content or bleeding off the page. Blame pandoc for using `longtable`).
 
-- Here's some raw latex code. It won't be recognized unless the output is LaTeX/pdf and you have to proper parse-raw option set. It's the same LaTeX code block from above rendered as an actual Table \ref{tbl:rawtex}. The position may shift because it's a floating environment.
+
+Here's some raw latex code. It won't be recognized unless the output is LaTeX/pdf and you have to proper parse-raw option set. It's the same LaTeX code block from above rendered as an actual Table \ref{tbl:rawtex}. The position may shift because it's a floating environment.
 
 \begin{table}
 \centering
@@ -124,6 +161,63 @@ Age & Frequency \\ \hline
 36--45  & 22 \\ \hline
 \end{tabular}
 \end{table}
+
+Checking rendering of Table {@tbl:tbllong}.
+
+ id     sess     cond     rep      trial        age      demographic   gender   maturation
+----- --------- ------ --------- ---------- ----------- ------------- -------- ------------
+ S01   -0.1706    -B    -0.2317   -0.3189    -0.004132      1.103        -m        -pre
+ S01   -0.1706    -A    -0.2317   -0.2226    -0.004132      1.103        -m        -pre
+ S01   -0.1706    -C    -0.2317   -0.1262    -0.004132      1.103        -m        -pre
+ S01   -0.1706    -C     0.061    -0.02987   -0.004132      1.103        -m        -pre
+ S01   -0.1706    -A     0.061    0.06647    -0.004132      1.103        -m        -pre
+ S01   -0.1706    -A    0.3537     0.1628    -0.004132      1.103        -m        -pre
+ S01   -0.1706    -C    0.3537     0.2591    -0.004132      1.103        -m        -pre
+ S01   -0.1706    -B     0.061     0.3555    -0.004132      1.103        -m        -pre
+ S01   -0.1706    -B    0.3537     0.4518    -0.004132      1.103        -m        -pre
+ S01   -0.1706    -C    0.6463     0.5482    -0.004132      1.103        -m        -pre
+ S01   -0.1706    -C     0.939     0.6445    -0.004132      1.103        -m        -pre
+ S01   -0.1706    -B    0.6463     0.7409    -0.004132      1.103        -m        -pre
+ S01   -0.1706    -A    0.6463     0.8372    -0.004132      1.103        -m        -pre
+ S01   -0.1706    -B     0.939     0.9335    -0.004132      1.103        -m        -pre
+ S01   -0.1706    -B     1.232      1.03     -0.004132      1.103        -m        -pre
+ S01   -0.1706    -A     0.939     1.126     -0.004132      1.103        -m        -pre
+ S01   -0.1706    -A     1.232     1.223     -0.004132      1.103        -m        -pre
+ S01   -0.1706    -C     1.232     1.319     -0.004132      1.103        -m        -pre
+ S02   -0.1706    -B    -0.2317   -0.3189     0.01387      0.2929        -m        -pre
+ S02   -0.1706    -A    -0.2317   -0.2226     0.01387      0.2929        -m        -pre
+ S02   -0.1706    -C    -0.2317   -0.1262     0.01387      0.2929        -m        -pre
+ S02   -0.1706    -A     0.061    -0.02987    0.01387      0.2929        -m        -pre
+ S02   -0.1706    -A    0.3537    0.06647     0.01387      0.2929        -m        -pre
+ S02   -0.1706    -C     0.061     0.1628     0.01387      0.2929        -m        -pre
+ S02   -0.1706    -C    0.3537     0.2591     0.01387      0.2929        -m        -pre
+ S02   -0.1706    -A    0.6463     0.3555     0.01387      0.2929        -m        -pre
+ S02   -0.1706    -B     0.061     0.4518     0.01387      0.2929        -m        -pre
+ S02   -0.1706    -B    0.3537     0.5482     0.01387      0.2929        -m        -pre
+ S02   -0.1706    -B    0.6463     0.6445     0.01387      0.2929        -m        -pre
+ S02   -0.1706    -A     0.939     0.7409     0.01387      0.2929        -m        -pre
+ S02   -0.1706    -A     1.232     0.8372     0.01387      0.2929        -m        -pre
+ S02   -0.1706    -C    0.6463     0.9335     0.01387      0.2929        -m        -pre
+ S02   -0.1706    -C     0.939      1.03      0.01387      0.2929        -m        -pre
+ S02   -0.1706    -B     0.939     1.126      0.01387      0.2929        -m        -pre
+ S02   -0.1706    -C     1.232     1.223      0.01387      0.2929        -m        -pre
+ S02   -0.1706    -B     1.232     1.319      0.01387      0.2929        -m        -pre
+ S03   -0.1706    -A    -0.2317   -0.3189     -0.2321       1.464        -m        -pre
+ S03   -0.1706    -B    -0.2317   -0.2226     -0.2321       1.464        -m        -pre
+ S03   -0.1706    -A     0.061    -0.1262     -0.2321       1.464        -m        -pre
+ S03   -0.1706    -C    -0.2317   -0.02987    -0.2321       1.464        -m        -pre
+ S03   -0.1706    -B     0.061    0.06647     -0.2321       1.464        -m        -pre
+ S03   -0.1706    -A    0.3537     0.1628     -0.2321       1.464        -m        -pre
+ S03   -0.1706    -A    0.6463     0.2591     -0.2321       1.464        -m        -pre
+ S03   -0.1706    -B    0.3537     0.3555     -0.2321       1.464        -m        -pre
+ S03   -0.1706    -C     0.061     0.4518     -0.2321       1.464        -m        -pre
+ S03   -0.1706    -C    0.3537     0.5482     -0.2321       1.464        -m        -pre
+ S03   -0.1706    -A     0.939     0.6445     -0.2321       1.464        -m        -pre
+ S03   -0.1706    -C    0.6463     0.7409     -0.2321       1.464        -m        -pre
+ S03   -0.1706    -B    0.6463     0.8372     -0.2321       1.464        -m        -pre
+ S03   -0.1706    -C     0.939     0.9335     -0.2321       1.464        -m        -pre
+
+Table: Testing a longtable. {#tbl:tbllong}
 
 - Here's an example of inline LaTeX math, $p=.0499$.
 
