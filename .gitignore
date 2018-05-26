@@ -46,3 +46,4 @@ tex2pdf*
 examples/tex2pdf*
 pandoc/default.tex
 **/~$apa*
+pandoc/custom-reference.docx

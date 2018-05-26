@@ -6,6 +6,11 @@ A Sublime Text build system / Visual Studio Code task runner for writing APA man
 
 ## Pandoc
 
+<!--
+pandoc --print-default-data-file reference.docx > custom-reference.docx
+-->
+
+
 You need Pandoc to use the pandoc templates. You can find it here: <https://pandoc.org/installing.html>
 
 ## LaTex / Word

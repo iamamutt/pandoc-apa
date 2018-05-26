@@ -1,8 +1,44 @@
 Quick pandoc overview
 =====================
 
-Words go here, also here is a citation (Lastname & Someone, 2016). According to Burling (2016), something bad happened. See Figure [1](#fig:myplot). This is a bold statement... **WOW!**, and here's \_some *emphasis for you* too. Sometimes you need some typewrite-like font, like when writing code: `my_answer = 1 + 1`. Other types you may need to write blocks of code, like this:
+::: {custom-style="FirstParagraph"}
+The YAML metadata block is at the top of the document and take on key-value pairs like so:
+:::
 
+::: {custom-style="SourceCode"}
+    ---
+    # string field with other characters should be quoted
+    title: "Some specials: Characters in the title?!?"
+
+    # toggle values
+    twogroups: true
+
+    # nested fields with text
+    joucommands:
+        leftheader: some ascii text
+        journal: other text
+
+    # lists
+    bibliography:
+        - references.bib
+        - other_references.bib
+
+    # multiline text
+    abstract: |
+        lines go here
+        and here.
+    ---
+:::
+
+::: {custom-style="FirstParagraph"}
+Words go here, also here is a citation (Lastname & Someone, 2016). According to Burling (2016),
+something bad happened. See Figure [[1]{custom-style="Hyperlink"}](#fig:myplot). This is a bold
+statement... **WOW!**, and here's \_some *emphasis for you* too. Sometimes you need some
+typewrite-like font, like when writing code: `my_answer = 1 + 1`. Other types you may need to
+write blocks of code, like this:
+:::
+
+::: {custom-style="SourceCode"}
     \begin{table}
     \centering
     \begin{tabular}{|l|l|}\hline
@@ -12,114 +48,662 @@ Words go here, also here is a citation (Lastname & Someone, 2016). According to 
     36--45  & 22 \\ \hline
     \end{tabular}
     \end{table}
+:::
 
 []{#fig:myplot .anchor}
 
-![Figure 1: Your figure caption goes here.](media/rId22.png "A title"){width="3.33299978127734in" height="3.33299978127734in"}
+::: {custom-style="CaptionedFigure"}
+![Figure 1: Your figure caption goes
+here.](c:\Users\josep\Dropbox\appdata\pandoc-apa\example/media/docx/media/rId21.png "A title"){width="3.33299978127734in"
+height="3.33299978127734in"}
+:::
 
+::: {custom-style="ImageCaption"}
 Figure 1: Your figure caption goes here.
+:::
 
-See Table [1](#tbl:mytable) for an example on making tables using the default extension. In APA man mode, Tables are sent to the end of the document unless the following is used in the YAML header at the top of this document:
+::: {custom-style="BodyText"}
+See Table [[1]{custom-style="Hyperlink"}](#tbl:mytable) for an example on making tables using the
+default extension. If tables are not referenced, then they are not given table numbers and
+arranged with other tables. In APA man mode, Tables are sent to the end of the document unless the
+following is used in the YAML header at the top of this document:
+:::
 
-    classoption:
-        - floatsintext
+::: {custom-style="SourceCode"}
+    floatsintext: true
+:::
 
 []{#tbl:mytable .anchor}
 
+::: {custom-style="TableCaption"}
 Table 1: A table.
+:::
 
-  Right   Left   Default   Center
-  ------- ------ --------- --------
-  12      12     12        12
-  123     123    123       123
-  1       1      1         1
++-----------------------+-----------------------+-----------------------+-----------------------+
+| ::: {custom-style="Co | ::: {custom-style="Co | ::: {custom-style="Co | ::: {custom-style="Co |
+| mpact"}               | mpact"}               | mpact"}               | mpact"}               |
+| Right                 | Left                  | Default               | Center                |
+| :::                   | :::                   | :::                   | :::                   |
++=======================+=======================+=======================+=======================+
+| ::: {custom-style="Co | ::: {custom-style="Co | ::: {custom-style="Co | ::: {custom-style="Co |
+| mpact"}               | mpact"}               | mpact"}               | mpact"}               |
+| 12                    | 12                    | 12                    | 12                    |
+| :::                   | :::                   | :::                   | :::                   |
++-----------------------+-----------------------+-----------------------+-----------------------+
+| ::: {custom-style="Co | ::: {custom-style="Co | ::: {custom-style="Co | ::: {custom-style="Co |
+| mpact"}               | mpact"}               | mpact"}               | mpact"}               |
+| 123                   | 123                   | 123                   | 123                   |
+| :::                   | :::                   | :::                   | :::                   |
++-----------------------+-----------------------+-----------------------+-----------------------+
+| ::: {custom-style="Co | ::: {custom-style="Co | ::: {custom-style="Co | ::: {custom-style="Co |
+| mpact"}               | mpact"}               | mpact"}               | mpact"}               |
+| 1                     | 1                     | 1                     | 1                     |
+| :::                   | :::                   | :::                   | :::                   |
++-----------------------+-----------------------+-----------------------+-----------------------+
 
-  : Table 1: A table.
+: Table 1: A table.
 
--   This is another type of pandoc table ([2](#tbl:anotherone)). It should look the same.[^1]
+-   ::: {custom-style="Compact"}
+    This is another type of pandoc table ([[2]{custom-style="Hyperlink"}](#tbl:anotherone)). It
+    should look the same.[^1]
+    :::
 
 []{#tbl:anotherone .anchor}
 
+::: {custom-style="TableCaption"}
 Table 2: Another one
+:::
 
-  Right   Left   Default   Center
-  ------- ------ --------- --------
-  12      12     12        12
-  123     123    123       123
-  1       1      1         1
++-----------------------+-----------------------+-----------------------+-----------------------+
+| ::: {custom-style="Co | ::: {custom-style="Co | ::: {custom-style="Co | ::: {custom-style="Co |
+| mpact"}               | mpact"}               | mpact"}               | mpact"}               |
+| Right                 | Left                  | Default               | Center                |
+| :::                   | :::                   | :::                   | :::                   |
++=======================+=======================+=======================+=======================+
+| ::: {custom-style="Co | ::: {custom-style="Co | ::: {custom-style="Co | ::: {custom-style="Co |
+| mpact"}               | mpact"}               | mpact"}               | mpact"}               |
+| 12                    | 12                    | 12                    | 12                    |
+| :::                   | :::                   | :::                   | :::                   |
++-----------------------+-----------------------+-----------------------+-----------------------+
+| ::: {custom-style="Co | ::: {custom-style="Co | ::: {custom-style="Co | ::: {custom-style="Co |
+| mpact"}               | mpact"}               | mpact"}               | mpact"}               |
+| 123                   | 123                   | 123                   | 123                   |
+| :::                   | :::                   | :::                   | :::                   |
++-----------------------+-----------------------+-----------------------+-----------------------+
+| ::: {custom-style="Co | ::: {custom-style="Co | ::: {custom-style="Co | ::: {custom-style="Co |
+| mpact"}               | mpact"}               | mpact"}               | mpact"}               |
+| 1                     | 1                     | 1                     | 1                     |
+| :::                   | :::                   | :::                   | :::                   |
++-----------------------+-----------------------+-----------------------+-----------------------+
 
-  : Table 2: Another one
+: Table 2: Another one
 
-And another multi-line table which is more complicated to make. It may requires a pagebreak in two-column (jou) mode because pandoc uses `longtable` which doesn't work in two-column mode.Some additional latex hacks are added to the template to allow it to work (at the risk of losing content or bleeding off the page. Blame pandoc for using `longtable`).
+::: {custom-style="TableCaption"}
+And another multi-line table which is more complicated to make. It may require a pagebreak in
+two-column (jou) mode because pandoc uses `longtable` which doesn't work in two-column mode. It
+has no reference so it doesn't start with "Table x." Some additional latex hacks are added to the
+template to allow it to work (at the risk of losing content or bleeding off the page. Blame pandoc
+for using `longtable`).
+:::
 
-  -----------------------------------------
-  Fruit     Price    Advantages
-  --------- -------- ----------------------
-  Bananas   \$1.34   -   built-in wrapper
-                     
-                     -   bright color
-                     
++------------------------------+------------------------------+----------------------------------+
+| ::: {custom-style="Compact"} | ::: {custom-style="Compact"} | ::: {custom-style="Compact"}     |
+| Fruit                        | Price                        | Advantages                       |
+| :::                          | :::                          | :::                              |
++==============================+==============================+==================================+
+| ::: {custom-style="Compact"} | ::: {custom-style="Compact"} | -   ::: {custom-style="Compact"} |
+| Bananas                      | \$1.34                       |     built-in wrapper             |
+| :::                          | :::                          |     :::                          |
+|                              |                              |                                  |
+|                              |                              | -   ::: {custom-style="Compact"} |
+|                              |                              |     bright color                 |
+|                              |                              |     :::                          |
++------------------------------+------------------------------+----------------------------------+
+| ::: {custom-style="Compact"} | ::: {custom-style="Compact"} | -   ::: {custom-style="Compact"} |
+| Oranges                      | \$2.10                       |     cures scurvy                 |
+| :::                          | :::                          |     :::                          |
+|                              |                              |                                  |
+|                              |                              | -   ::: {custom-style="Compact"} |
+|                              |                              |     tasty                        |
+|                              |                              |     :::                          |
++------------------------------+------------------------------+----------------------------------+
 
-  Oranges   \$2.10   -   cures scurvy
-                     
-                     -   tasty
-                     
-  -----------------------------------------
+: And another multi-line table which is more complicated to make. It may require a pagebreak in
+two-column (jou) mode because pandoc uses longtable which doesn't work in two-column mode. It has
+no reference so it doesn't start with "Table x." Some additional latex hacks are added to the
+template to allow it to work (at the risk of losing content or bleeding off the page. Blame pandoc
+for using longtable).
 
-  : And another multi-line table which is more complicated to make. It may requires a pagebreak in two-column (jou) mode because pandoc uses longtable which doesn't work in two-column mode.Some additional latex hacks are added to the template to allow it to work (at the risk of losing content or bleeding off the page. Blame pandoc for using longtable).
+::: {custom-style="FirstParagraph"}
+Here's some raw latex code. It won't be recognized unless the output is LaTeX/pdf and you have to
+proper parse-raw option set. It's the same LaTeX code block from above rendered as an actual Table
+. The position may shift because it's a floating environment.
+:::
 
--   Here's some raw latex code. It won't be recognized unless the output is LaTeX/pdf and you have to proper parse-raw option set. It's the same LaTeX code block from above rendered as an actual Table . The position may shift because it's a floating environment.
+::: {custom-style="BodyText"}
+Checking rendering of Table [[3]{custom-style="Hyperlink"}](#tbl:tbllong).
+:::
 
-<!-- -->
+[]{#tbl:tbllong .anchor}
+
+::: {custom-style="TableCaption"}
+Table 3: Testing a longtable.
+:::
+
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| id      | sess    | cond    | rep     | trial   | age     | demogra | gender  | maturat |
+| :::     | :::     | :::     | :::     | :::     | :::     | phic    | :::     | ion     |
+|         |         |         |         |         |         | :::     |         | :::     |
++=========+=========+=========+=========+=========+=========+=========+=========+=========+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S01     | -0.1706 | -B      | -0.2317 | -0.3189 | -0.0041 | 1.103   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | 32      | :::     | :::     | :::     |
+|         |         |         |         |         | :::     |         |         |         |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S01     | -0.1706 | -A      | -0.2317 | -0.2226 | -0.0041 | 1.103   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | 32      | :::     | :::     | :::     |
+|         |         |         |         |         | :::     |         |         |         |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S01     | -0.1706 | -C      | -0.2317 | -0.1262 | -0.0041 | 1.103   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | 32      | :::     | :::     | :::     |
+|         |         |         |         |         | :::     |         |         |         |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S01     | -0.1706 | -C      | 0.061   | -0.0298 | -0.0041 | 1.103   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | 7       | 32      | :::     | :::     | :::     |
+|         |         |         |         | :::     | :::     |         |         |         |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S01     | -0.1706 | -A      | 0.061   | 0.06647 | -0.0041 | 1.103   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | 32      | :::     | :::     | :::     |
+|         |         |         |         |         | :::     |         |         |         |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S01     | -0.1706 | -A      | 0.3537  | 0.1628  | -0.0041 | 1.103   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | 32      | :::     | :::     | :::     |
+|         |         |         |         |         | :::     |         |         |         |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S01     | -0.1706 | -C      | 0.3537  | 0.2591  | -0.0041 | 1.103   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | 32      | :::     | :::     | :::     |
+|         |         |         |         |         | :::     |         |         |         |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S01     | -0.1706 | -B      | 0.061   | 0.3555  | -0.0041 | 1.103   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | 32      | :::     | :::     | :::     |
+|         |         |         |         |         | :::     |         |         |         |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S01     | -0.1706 | -B      | 0.3537  | 0.4518  | -0.0041 | 1.103   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | 32      | :::     | :::     | :::     |
+|         |         |         |         |         | :::     |         |         |         |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S01     | -0.1706 | -C      | 0.6463  | 0.5482  | -0.0041 | 1.103   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | 32      | :::     | :::     | :::     |
+|         |         |         |         |         | :::     |         |         |         |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S01     | -0.1706 | -C      | 0.939   | 0.6445  | -0.0041 | 1.103   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | 32      | :::     | :::     | :::     |
+|         |         |         |         |         | :::     |         |         |         |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S01     | -0.1706 | -B      | 0.6463  | 0.7409  | -0.0041 | 1.103   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | 32      | :::     | :::     | :::     |
+|         |         |         |         |         | :::     |         |         |         |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S01     | -0.1706 | -A      | 0.6463  | 0.8372  | -0.0041 | 1.103   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | 32      | :::     | :::     | :::     |
+|         |         |         |         |         | :::     |         |         |         |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S01     | -0.1706 | -B      | 0.939   | 0.9335  | -0.0041 | 1.103   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | 32      | :::     | :::     | :::     |
+|         |         |         |         |         | :::     |         |         |         |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S01     | -0.1706 | -B      | 1.232   | 1.03    | -0.0041 | 1.103   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | 32      | :::     | :::     | :::     |
+|         |         |         |         |         | :::     |         |         |         |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S01     | -0.1706 | -A      | 0.939   | 1.126   | -0.0041 | 1.103   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | 32      | :::     | :::     | :::     |
+|         |         |         |         |         | :::     |         |         |         |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S01     | -0.1706 | -A      | 1.232   | 1.223   | -0.0041 | 1.103   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | 32      | :::     | :::     | :::     |
+|         |         |         |         |         | :::     |         |         |         |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S01     | -0.1706 | -C      | 1.232   | 1.319   | -0.0041 | 1.103   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | 32      | :::     | :::     | :::     |
+|         |         |         |         |         | :::     |         |         |         |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S02     | -0.1706 | -B      | -0.2317 | -0.3189 | 0.01387 | 0.2929  | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S02     | -0.1706 | -A      | -0.2317 | -0.2226 | 0.01387 | 0.2929  | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S02     | -0.1706 | -C      | -0.2317 | -0.1262 | 0.01387 | 0.2929  | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S02     | -0.1706 | -A      | 0.061   | -0.0298 | 0.01387 | 0.2929  | -m      | -pre    |
+| :::     | :::     | :::     | :::     | 7       | :::     | :::     | :::     | :::     |
+|         |         |         |         | :::     |         |         |         |         |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S02     | -0.1706 | -A      | 0.3537  | 0.06647 | 0.01387 | 0.2929  | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S02     | -0.1706 | -C      | 0.061   | 0.1628  | 0.01387 | 0.2929  | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S02     | -0.1706 | -C      | 0.3537  | 0.2591  | 0.01387 | 0.2929  | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S02     | -0.1706 | -A      | 0.6463  | 0.3555  | 0.01387 | 0.2929  | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S02     | -0.1706 | -B      | 0.061   | 0.4518  | 0.01387 | 0.2929  | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S02     | -0.1706 | -B      | 0.3537  | 0.5482  | 0.01387 | 0.2929  | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S02     | -0.1706 | -B      | 0.6463  | 0.6445  | 0.01387 | 0.2929  | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S02     | -0.1706 | -A      | 0.939   | 0.7409  | 0.01387 | 0.2929  | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S02     | -0.1706 | -A      | 1.232   | 0.8372  | 0.01387 | 0.2929  | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S02     | -0.1706 | -C      | 0.6463  | 0.9335  | 0.01387 | 0.2929  | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S02     | -0.1706 | -C      | 0.939   | 1.03    | 0.01387 | 0.2929  | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S02     | -0.1706 | -B      | 0.939   | 1.126   | 0.01387 | 0.2929  | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S02     | -0.1706 | -C      | 1.232   | 1.223   | 0.01387 | 0.2929  | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S02     | -0.1706 | -B      | 1.232   | 1.319   | 0.01387 | 0.2929  | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S03     | -0.1706 | -A      | -0.2317 | -0.3189 | -0.2321 | 1.464   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S03     | -0.1706 | -B      | -0.2317 | -0.2226 | -0.2321 | 1.464   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S03     | -0.1706 | -A      | 0.061   | -0.1262 | -0.2321 | 1.464   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S03     | -0.1706 | -C      | -0.2317 | -0.0298 | -0.2321 | 1.464   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | 7       | :::     | :::     | :::     | :::     |
+|         |         |         |         | :::     |         |         |         |         |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S03     | -0.1706 | -B      | 0.061   | 0.06647 | -0.2321 | 1.464   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S03     | -0.1706 | -A      | 0.3537  | 0.1628  | -0.2321 | 1.464   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S03     | -0.1706 | -A      | 0.6463  | 0.2591  | -0.2321 | 1.464   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S03     | -0.1706 | -B      | 0.3537  | 0.3555  | -0.2321 | 1.464   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S03     | -0.1706 | -C      | 0.061   | 0.4518  | -0.2321 | 1.464   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S03     | -0.1706 | -C      | 0.3537  | 0.5482  | -0.2321 | 1.464   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S03     | -0.1706 | -A      | 0.939   | 0.6445  | -0.2321 | 1.464   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S03     | -0.1706 | -C      | 0.6463  | 0.7409  | -0.2321 | 1.464   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S03     | -0.1706 | -B      | 0.6463  | 0.8372  | -0.2321 | 1.464   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+| ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu | ::: {cu |
+| stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st | stom-st |
+| yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co | yle="Co |
+| mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} | mpact"} |
+| S03     | -0.1706 | -C      | 0.939   | 0.9335  | -0.2321 | 1.464   | -m      | -pre    |
+| :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     | :::     |
++---------+---------+---------+---------+---------+---------+---------+---------+---------+
+
+: Table 3: Testing a longtable.
 
 -   Here's an example of inline LaTeX math, $p = .0499$.
 
 -   Here's a an example of using LaTeX syntax for displaying equations.
 
-$$\hat{y} = \beta_{0} + \beta_{1}x$$
+$$\widehat{y} = \beta_{0} + \beta_{1}x$$
 
-Pandoc doesn't know how to make inline headings when converting to Word. If you put the cursor at the end of the heading, press Ctrl+Alt+Enter and it will move it down.
+::: {custom-style="FirstParagraph"}
+Pandoc doesn't know how to make inline headings when converting to Word. If you put the cursor at
+the end of the heading, press Ctrl+Alt+Enter and it will move it down.
+:::
 
 Subsection heading
 ------------------
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec egestas sit amet, convallis a felis. Praesent dictum nec mauris quis molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien tempor risus, quis congue sapien turpis et justo. Suspendisse potenti.
+::: {custom-style="FirstParagraph"}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue
+eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut
+lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem
+libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur
+diam elit, lacinia nec egestas sit amet, convallis a felis. Praesent dictum nec mauris quis
+molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien tempor risus, quis congue
+sapien turpis et justo. Suspendisse potenti.
+:::
 
-Duis viverra aliquet metus, eget aliquam tellus mollis imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec egestas sit amet, convallis a felis.
+::: {custom-style="BodyText"}
+Duis viverra aliquet metus, eget aliquam tellus mollis imperdiet. Lorem ipsum dolor sit amet,
+consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue eu vehicula sem. Vestibulum
+venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut lobortis ullamcorper,
+consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem libero dapibus sem, at
+molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec
+egestas sit amet, convallis a felis.
+:::
 
 ### Subsubsection heading
 
-Nullam nec est ut mauris eleifend pulvinar ac in nisl. In eleifend, velit et rhoncus pretium, justo lectus viverra enim, nec feugiat ante mauris vitae magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi felis nulla, iaculis dapibus sapien quis, pretium laoreet est. Mauris vel sapien tempor, dapibus ipsum sit amet, sagittis tellus. Aliquam ipsum metus, ultricies eleifend dolor nec, ultricies mollis sapien. Integer placerat ante condimentum sagittis elementum. Fusce aliquam, libero a iaculis eleifend, ipsum ante tincidunt ante, ut bibendum dolor risus ut nibh. Sed fermentum tellus id ligula sodales, ut condimentum tortor tempus. Phasellus suscipit dapibus est sed consectetur.
+::: {custom-style="FirstParagraph"}
+Nullam nec est ut mauris eleifend pulvinar ac in nisl. In eleifend, velit et rhoncus pretium,
+justo lectus viverra enim, nec feugiat ante mauris vitae magna. Lorem ipsum dolor sit amet,
+consectetur adipiscing elit. Morbi felis nulla, iaculis dapibus sapien quis, pretium laoreet est.
+Mauris vel sapien tempor, dapibus ipsum sit amet, sagittis tellus. Aliquam ipsum metus, ultricies
+eleifend dolor nec, ultricies mollis sapien. Integer placerat ante condimentum sagittis elementum.
+Fusce aliquam, libero a iaculis eleifend, ipsum ante tincidunt ante, ut bibendum dolor risus ut
+nibh. Sed fermentum tellus id ligula sodales, ut condimentum tortor tempus. Phasellus suscipit
+dapibus est sed consectetur.
+:::
 
-Nullam nec est ut mauris eleifend pulvinar ac in nisl. In eleifend, velit et rhoncus pretium, justo lectus viverra enim, nec feugiat ante mauris vitae magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi felis nulla, iaculis dapibus sapien quis, pretium laoreet est. Mauris vel sapien tempor, dapibus ipsum sit amet, sagittis tellus. Aliquam ipsum metus, ultricies eleifend dolor nec, ultricies mollis sapien. Integer placerat ante condimentum sagittis elementum. Fusce aliquam, libero a iaculis eleifend, ipsum ante tincidunt ante, ut bibendum dolor risus ut nibh. Sed fermentum tellus id ligula sodales, ut condimentum tortor tempus. Phasellus suscipit dapibus est sed consectetur.
+::: {custom-style="BodyText"}
+Nullam nec est ut mauris eleifend pulvinar ac in nisl. In eleifend, velit et rhoncus pretium,
+justo lectus viverra enim, nec feugiat ante mauris vitae magna. Lorem ipsum dolor sit amet,
+consectetur adipiscing elit. Morbi felis nulla, iaculis dapibus sapien quis, pretium laoreet est.
+Mauris vel sapien tempor, dapibus ipsum sit amet, sagittis tellus. Aliquam ipsum metus, ultricies
+eleifend dolor nec, ultricies mollis sapien. Integer placerat ante condimentum sagittis elementum.
+Fusce aliquam, libero a iaculis eleifend, ipsum ante tincidunt ante, ut bibendum dolor risus ut
+nibh. Sed fermentum tellus id ligula sodales, ut condimentum tortor tempus. Phasellus suscipit
+dapibus est sed consectetur.
+:::
 
 #### Paragraph heading
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec egestas sit amet, convallis a felis. Praesent dictum nec mauris quis molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien tempor risus, quis congue sapien turpis et justo. Suspendisse potenti. Duis viverra aliquet metus, eget aliquam tellus mollis imperdiet.
+::: {custom-style="FirstParagraph"}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue
+eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut
+lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem
+libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur
+diam elit, lacinia nec egestas sit amet, convallis a felis. Praesent dictum nec mauris quis
+molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien tempor risus, quis congue
+sapien turpis et justo. Suspendisse potenti. Duis viverra aliquet metus, eget aliquam tellus
+mollis imperdiet.
+:::
 
 ##### Subparagraph heading
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec egestas sit amet, convallis a felis. Praesent dictum nec mauris quis molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien tempor risus, quis congue sapien turpis et justo. Suspendisse potenti. Duis viverra aliquet metus, eget aliquam tellus mollis imperdiet.
+::: {custom-style="FirstParagraph"}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue
+eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut
+lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem
+libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur
+diam elit, lacinia nec egestas sit amet, convallis a felis. Praesent dictum nec mauris quis
+molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien tempor risus, quis congue
+sapien turpis et justo. Suspendisse potenti. Duis viverra aliquet metus, eget aliquam tellus
+mollis imperdiet.
+:::
 
 ###### Getting silly with the amount of subheadings
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur diam elit, lacinia nec egestas sit amet, convallis a felis. Praesent dictum nec mauris quis molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien tempor risus, quis congue sapien turpis et justo. Suspendisse potenti. Duis viverra aliquet metus, eget aliquam tellus mollis imperdiet.
+::: {custom-style="FirstParagraph"}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et magna vitae ipsum rhoncus congue
+eu vehicula sem. Vestibulum venenatis mauris ac urna porta placerat. Ut ante neque, malesuada ut
+lobortis ullamcorper, consectetur vitae ipsum. Morbi sodales, justo eu pretium venenatis, sem
+libero dapibus sem, at molestie lectus felis ut nunc. Praesent ultrices sagittis porta. Curabitur
+diam elit, lacinia nec egestas sit amet, convallis a felis. Praesent dictum nec mauris quis
+molestie. Proin ullamcorper, mauris sed molestie aliquet, nisi sapien tempor risus, quis congue
+sapien turpis et justo. Suspendisse potenti. Duis viverra aliquet metus, eget aliquam tellus
+mollis imperdiet.
+:::
 
-Nullam nec est ut mauris eleifend pulvinar ac in nisl. In eleifend, velit et rhoncus pretium, justo lectus viverra enim, nec feugiat ante mauris vitae magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi felis nulla, iaculis dapibus sapien quis, pretium laoreet est. Mauris vel sapien tempor, dapibus ipsum sit amet, sagittis tellus. Aliquam ipsum metus, ultricies eleifend dolor nec, ultricies mollis sapien. Integer placerat ante condimentum sagittis elementum. Fusce aliquam, libero a iaculis eleifend, ipsum ante tincidunt ante, ut bibendum dolor risus ut nibh. Sed fermentum tellus id ligula sodales, ut condimentum tortor tempus. Phasellus suscipit dapibus est sed consectetur.
+::: {custom-style="BodyText"}
+Nullam nec est ut mauris eleifend pulvinar ac in nisl. In eleifend, velit et rhoncus pretium,
+justo lectus viverra enim, nec feugiat ante mauris vitae magna. Lorem ipsum dolor sit amet,
+consectetur adipiscing elit. Morbi felis nulla, iaculis dapibus sapien quis, pretium laoreet est.
+Mauris vel sapien tempor, dapibus ipsum sit amet, sagittis tellus. Aliquam ipsum metus, ultricies
+eleifend dolor nec, ultricies mollis sapien. Integer placerat ante condimentum sagittis elementum.
+Fusce aliquam, libero a iaculis eleifend, ipsum ante tincidunt ante, ut bibendum dolor risus ut
+nibh. Sed fermentum tellus id ligula sodales, ut condimentum tortor tempus. Phasellus suscipit
+dapibus est sed consectetur.
+:::
 
 ####### Heading 7
 
+::: {custom-style="FirstParagraph"}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+:::
 
 ######## Heading 8
 
+::: {custom-style="FirstParagraph"}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+:::
 
 References
 ==========
 
-Burling, J. M. (2016). Hi: A title about stuff. *Bottom Tier*, *1*, 1–2. <https://doi.org/10.1016/j.cogdev.2013.10.001>
+::: {custom-style="Bibliography"}
+Burling, J. M. (2016). Hi: A title about stuff. *Bottom Tier*, *1*, 1--2.
+[[https://doi.org/10.1016/j.cogdev.2013.10.001]{custom-style="Hyperlink"}](https://doi.org/10.1016/j.cogdev.2013.10.001)
+:::
 
-Lastname, F., & Someone, E. (2016). Article title. *Journal Name*, *1*, 1–50.
+::: {custom-style="Bibliography"}
+Lastname, F., & Someone, E. (2016). Article title. *Journal Name*, *1*, 1--50.
+:::
 
-[^1]: Sometimes docx files will have tables that are squished. Autofit the document width to fix.
+[^1]: ::: {custom-style="FootnoteText"}
+    []{custom-style="FootnoteReference"} Sometimes docx files will have tables that are squished.
+    Autofit the document width to fix.
+    :::

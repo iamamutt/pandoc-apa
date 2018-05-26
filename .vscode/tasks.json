@@ -35,8 +35,8 @@
         "--filter=pandoc-fignos",
         "--filter=pandoc-tablenos",
         "--filter=pandoc-citeproc",
-        "--csl=${workspaceRoot}/pandoc/apa.csl",
-        "--template=${workspaceRoot}/pandoc/apa_template.tex",
+        "--csl=${workspaceRoot:pandoc-apa}/pandoc/apa.csl",
+        "--template=${workspaceRoot:pandoc-apa}/pandoc/apa_template.tex",
         "--standalone"
       ],
       "problemMatcher": []
@@ -54,8 +54,8 @@
         "--filter=pandoc-fignos",
         "--filter=pandoc-tablenos",
         "--filter=pandoc-citeproc",
-        "--csl=${workspaceRoot}/pandoc/apa.csl",
-        "--reference-doc=${workspaceRoot}/pandoc/apa.docx"
+        "--csl=${workspaceRoot:pandoc-apa}/pandoc/apa.csl",
+        "--reference-doc=${workspaceRoot:pandoc-apa}/pandoc/apa.docx"
       ],
       "problemMatcher": []
     },
@@ -69,7 +69,7 @@
         "--to=docx-citations",
         "--output=${fileDirname}/${fileBasenameNoExtension}_raw.docx",
         "--dpi=300",
-        "--reference-doc=${workspaceRoot}/pandoc/apa.docx"
+        "--reference-doc=${workspaceRoot:pandoc-apa}/pandoc/apa.docx"
       ],
       "problemMatcher": []
     },
@@ -85,8 +85,8 @@
         "--filter=pandoc-fignos",
         "--filter=pandoc-tablenos",
         "--filter=pandoc-citeproc",
-        "--csl=${workspaceRoot}/pandoc/apa.csl",
-        "--template=${workspaceRoot}/pandoc/apa_template.tex",
+        "--csl=${workspaceRoot:pandoc-apa}/pandoc/apa.csl",
+        "--template=${workspaceRoot:pandoc-apa}/pandoc/apa_template.tex",
         "--standalone",
         "--biblatex"
       ],
@@ -104,7 +104,10 @@
         "--track-changes=accept",
         "--wrap=auto",
         "--columns=98",
-        "--extract-media=${fileDirname}/media/docx"
+        "--extract-media=${fileDirname}/media/docx",
+        "--filter=pandoc-fignos",
+        "--filter=pandoc-tablenos",
+        "--filter=pandoc-citeproc"
       ],
       "problemMatcher": []
     }
