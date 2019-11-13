@@ -50,3 +50,4 @@ pandoc/custom-reference.docx
 pandoc/apa_backup.docx
 pandoc/PM6E.pdf
 pandoc/APA_Template_2018.doc
+*.DS_Store

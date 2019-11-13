@@ -50,11 +50,9 @@ write blocks of code, like this:
     \end{table}
 :::
 
-[]{#fig:myplot .anchor}
-
 ::: {custom-style="CaptionedFigure"}
-![Figure 1: Your figure caption goes
-here.](c:\Users\josep\Dropbox\appdata\pandoc-apa\example/media/docx/media/rId21.png "A title"){width="3.33299978127734in"
+[]{#fig:myplot .anchor}![Figure 1: Your figure caption goes
+here.](/Users/jb/Desktop/pandoc-apa/example/media/docx/media/rId21.png){width="3.33299978127734in"
 height="3.33299978127734in"}
 :::
 
@@ -72,8 +70,6 @@ following is used in the YAML header at the top of this document:
 ::: {custom-style="SourceCode"}
     floatsintext: true
 :::
-
-[]{#tbl:mytable .anchor}
 
 ::: {custom-style="TableCaption"}
 Table 1: A table.
@@ -107,8 +103,6 @@ Table 1: A table.
     This is another type of pandoc table ([[2]{custom-style="Hyperlink"}](#tbl:anotherone)). It
     should look the same.[^1]
     :::
-
-[]{#tbl:anotherone .anchor}
 
 ::: {custom-style="TableCaption"}
 Table 2: Another one
@@ -183,8 +177,6 @@ proper parse-raw option set. It's the same LaTeX code block from above rendered 
 ::: {custom-style="BodyText"}
 Checking rendering of Table [[3]{custom-style="Hyperlink"}](#tbl:tbllong).
 :::
-
-[]{#tbl:tbllong .anchor}
 
 ::: {custom-style="TableCaption"}
 Table 3: Testing a longtable.
