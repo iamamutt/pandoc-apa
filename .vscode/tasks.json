@@ -48,7 +48,7 @@
       "args": [
         "${file}",
         "--from=markdown",
-        "--to=docx+smart",
+        "--to=docx",
         "--output=${fileDirname}/${fileBasenameNoExtension}.docx",
         "--dpi=300",
         "--filter=pandoc-fignos",
@@ -66,7 +66,7 @@
       "args": [
         "${file}",
         "--from=markdown",
-        "--to=docx-citations",
+        "--to=docx",
         "--output=${fileDirname}/${fileBasenameNoExtension}_raw.docx",
         "--dpi=300",
         "--reference-doc=${workspaceRoot:pandoc-apa}/pandoc/apa.docx"
@@ -98,7 +98,7 @@
       "command": "pandoc",
       "args": [
         "${file}",
-        "--from=docx-smart+styles",
+        "--from=docx+styles",
         "--to=markdown-tex_math_single_backslash-tex_math_double_backslash",
         "--output=${fileDirname}/${fileBasenameNoExtension}_docx2md.md",
         "--track-changes=accept",
