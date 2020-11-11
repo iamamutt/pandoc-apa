@@ -1,115 +1,161 @@
+// See https://go.microsoft.com/fwlink/?LinkId=733558
+//  for the documentation about the tasks.json format
+// See https://code.visualstudio.com/docs/editor/tasks-appendix
+//  for additional Task settings
 {
-  // See https://go.microsoft.com/fwlink/?LinkId=733558
-  // for the documentation about the tasks.json format
-  "version": "2.0.0",
-  "type": "shell",
-  "presentation": {
-    "reveal": "silent",
-    "focus": false,
-    "echo": true,
-    "panel": "dedicated"
-  },
-  "options": {
-    "cwd": "${fileDirname}"
-  },
-  "tasks": [
-    {
-      "label": "Pandoc test",
-      "group": "build",
-      "command": "pandoc",
-      "args": ["-v"],
-      "problemMatcher": []
+    "version": "2.0.0",
+    "type": "shell",
+    "options": {
+        "cwd": "${fileDirname}"
     },
-    {
-      "label": "APA PDF",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "command": "pandoc",
-      "args": [
-        "${file}",
-        "--from=markdown",
-        "--to=latex",
-        "--output=${fileDirname}/${fileBasenameNoExtension}.pdf",
-        "--filter=pandoc-fignos",
-        "--filter=pandoc-tablenos",
-        "--filter=pandoc-citeproc",
-        "--csl=${workspaceRoot:pandoc-apa}/pandoc/apa.csl",
-        "--template=${workspaceRoot:pandoc-apa}/pandoc/apa_template.tex",
-        "--standalone"
-      ],
-      "problemMatcher": []
+    "presentation": {
+        "echo": true,
+        "focus": false,
+        "panel": "shared",
+        "reveal": "silent",
+        "clear": true
     },
-    {
-      "label": "APA DOCX",
-      "group": "build",
-      "command": "pandoc",
-      "args": [
-        "${file}",
-        "--from=markdown",
-        "--to=docx",
-        "--output=${fileDirname}/${fileBasenameNoExtension}.docx",
-        "--dpi=300",
-        "--filter=pandoc-fignos",
-        "--filter=pandoc-tablenos",
-        "--filter=pandoc-citeproc",
-        "--csl=${workspaceRoot:pandoc-apa}/pandoc/apa.csl",
-        "--reference-doc=${workspaceRoot:pandoc-apa}/pandoc/apa.docx"
-      ],
-      "problemMatcher": []
-    },
-    {
-      "label": "APA DOCX-RAW",
-      "group": "build",
-      "command": "pandoc",
-      "args": [
-        "${file}",
-        "--from=markdown",
-        "--to=docx",
-        "--output=${fileDirname}/${fileBasenameNoExtension}_raw.docx",
-        "--dpi=300",
-        "--reference-doc=${workspaceRoot:pandoc-apa}/pandoc/apa.docx"
-      ],
-      "problemMatcher": []
-    },
-    {
-      "label": "APA TEX",
-      "group": "build",
-      "command": "pandoc",
-      "args": [
-        "${file}",
-        "--from=markdown",
-        "--to=latex",
-        "--output=${fileDirname}/${fileBasenameNoExtension}.tex",
-        "--filter=pandoc-fignos",
-        "--filter=pandoc-tablenos",
-        "--filter=pandoc-citeproc",
-        "--csl=${workspaceRoot:pandoc-apa}/pandoc/apa.csl",
-        "--template=${workspaceRoot:pandoc-apa}/pandoc/apa_template.tex",
-        "--standalone",
-        "--biblatex"
-      ],
-      "problemMatcher": []
-    },
-    {
-      "label": "DOCX2MD",
-      "group": "build",
-      "command": "pandoc",
-      "args": [
-        "${file}",
-        "--from=docx+styles",
-        "--to=markdown-tex_math_single_backslash-tex_math_double_backslash",
-        "--output=${fileDirname}/${fileBasenameNoExtension}_docx2md.md",
-        "--track-changes=accept",
-        "--wrap=auto",
-        "--columns=98",
-        "--extract-media=${fileDirname}/media/docx",
-        "--filter=pandoc-fignos",
-        "--filter=pandoc-tablenos",
-        "--filter=pandoc-citeproc"
-      ],
-      "problemMatcher": []
-    }
-  ]
+    "tasks": [
+        {
+            "label": "Pandoc version",
+            "command": "pandoc",
+            "args": [
+                "-v"
+            ],
+            "group": "test"
+        },
+        {
+            "label": "Pandoc test",
+            "command": "pandoc",
+            "args": [
+                "https://raw.githubusercontent.com/iamamutt/pandoc-apa/master/README.md",
+                "--from=markdown",
+                "--to=markdown",
+                "--output=pandoc_apa_test_readme.md"
+            ],
+            "group": "test"
+        },
+        {
+            "label": "APA TEX",
+            "command": "pandoc",
+            "args": [
+                "${file}",
+                "--from=markdown",
+                "--to=latex",
+                "--output=${fileDirname}/${fileBasenameNoExtension}.tex",
+                "--standalone",
+                "--log=${fileDirname}/pandoc-apa_tex.log.json",
+                "--biblatex",
+                "--citeproc",
+                "--filter=pandoc-xnos",
+                "--csl=${workspaceRoot}/pandoc/apa.csl",
+                "--template=${workspaceRoot}/pandoc/apa_template.tex"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "APA PDF",
+            "command": "pandoc",
+            "args": [
+                "${file}",
+                "--from=markdown",
+                "--to=latex",
+                "--output=${fileDirname}/${fileBasenameNoExtension}.pdf",
+                "--standalone",
+                "--citeproc",
+                "--filter=pandoc-xnos",
+                "--csl=${workspaceRoot}/pandoc/apa.csl",
+                "--template=${workspaceRoot}/pandoc/apa_template.tex"
+            ],
+            "group": "build",
+            "dependsOn": [
+                "APA TEX"
+            ]
+        },
+        {
+            "label": "APA DOCX-RAW",
+            "command": "pandoc",
+            "args": [
+                "${file}",
+                "--from=markdown",
+                "--to=docx",
+                "--output=${fileDirname}/${fileBasenameNoExtension}_raw.docx",
+                "--dpi=300",
+                "--reference-doc=${workspaceRoot}/pandoc/apa.docx"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "APA DOCX",
+            "command": "pandoc",
+            "args": [
+                "${file}",
+                "--from=markdown",
+                "--to=docx",
+                "--output=${fileDirname}/${fileBasenameNoExtension}.docx",
+                "--dpi=300",
+                "--filter=pandoc-xnos",
+                "--citeproc",
+                "--csl=${workspaceRoot}/pandoc/apa.csl",
+                "--reference-doc=${workspaceRoot}/pandoc/apa.docx"
+            ],
+            "group": {
+                "isDefault": true,
+                "kind": "test"
+            },
+            "dependsOn": [
+                "APA DOCX-RAW"
+            ]
+        },
+        {
+            "label": "APA DOCX2MD",
+            "command": "pandoc",
+            "args": [
+                "${file}",
+                "--from=docx+styles",
+                "--to=markdown-tex_math_single_backslash-tex_math_double_backslash",
+                "--output=${fileDirname}/${fileBasenameNoExtension}_docx2md.md",
+                "--track-changes=accept",
+                "--wrap=auto",
+                "--columns=98",
+                "--extract-media=${fileDirname}/media/docx",
+                "--filter=pandoc-xnos",
+                "--citeproc"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "APA MARKDOWN TO MULTIFORMAT",
+            "group": {
+                "isDefault": true,
+                "kind": "build"
+            },
+            "dependsOn": [
+                "APA DOCX",
+                "APA PDF"
+            ]
+        }
+    ],
+    "problemMatcher": [
+        {
+            "fileLocation": [
+                "relative",
+                "${workspaceFolder}"
+            ],
+            "owner": "pandoc warn",
+            "pattern": [
+                {
+                    "file": 2,
+                    "kind": "file",
+                    "regexp": "^(pandoc-apa:\\s)(.*)$"
+                },
+                {
+                    "loop": true,
+                    "message": 2,
+                    "regexp": "^(\\[WARNING\\]\\s|Citeproc:\\s|(?=\\s{2,}))(.*)$"
+                }
+            ],
+            "severity": "warning"
+        }
+    ]
 }

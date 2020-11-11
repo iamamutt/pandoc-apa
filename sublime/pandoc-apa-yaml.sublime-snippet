@@ -1,5 +1,6 @@
 <snippet>
     <content><![CDATA[
+
 ---
 mode: man
 title: My Manuscript
@@ -12,7 +13,7 @@ institute:
     - Institute 2
 twogroups: true
 #bibliography:
-#	- myref.bib
+#    - myref.bib
 date:
 joucommands:
     leftheader:
@@ -31,6 +32,7 @@ authornote: |
 abstract: |
     Abstract text goes here.
 ---
+
 ]]></content>
 <description>Insert Pandoc APA6 yaml metadata</description>
 <tabTrigger>apayaml</tabTrigger>

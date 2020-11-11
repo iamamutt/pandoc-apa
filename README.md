@@ -13,7 +13,7 @@ pandoc --print-default-data-file reference.docx > custom-reference.docx
 
 You need Pandoc to use the pandoc templates. You can find it here: <https://pandoc.org/installing.html>
 
-## LaTex / Word
+## LaTeX / Word
 
 You'll need a LaTeX distribution to build the APA formatted pdf files (e.g., MikTex or MacTex), or Microsoft Word to convert markdown to .docx files.
 
@@ -25,7 +25,14 @@ Pandoc doesn't yet support cross referencing figures and tables. You'll need a P
 
 ## Sublime Text
 
-Copy the `pandoc` and `sublime` directories from this repository wherever your Packages folder is located in Sublime Text. For example, if the contents are not already in a folder called `pandoc-apa`, make a folder called `pandoc-apa` and copy contents here if on Windows: `C:\Users\username\AppData\Roaming\Sublime Text 3\Packages\User\pandoc-apa`.
+Copy the `pandoc` and `sublime` directories from this repository wherever your Packages folder is located in Sublime Text. For example, if the contents of this repository are not already in a folder called `pandoc-apa`, make a folder called `pandoc-apa` in Sublime text's User directory and copy contents there.
+
+Where to copy `pandoc` and `sublime` folders:
+
+- Windows: `C:\Users\username\AppData\Roaming\Sublime Text 3\Packages\User\pandoc-apa`
+- OSX: `/Users/username/Library/Application Support/Sublime Text 3/Packages/User/pandoc-apa`
+
+### Usage:
 
 - Press `ctrl + b` to build to pdf (or `cmd+b`)
 
@@ -47,16 +54,19 @@ Instead of copying the pandoc-apa contents for each project, you can now create 
 {
 	"folders": [
 		{
+            "name": "this-workspace",
 			"path": "."
 		},
 		{
+            "name": "pandoc-apa",
 			"path": "../pandoc-apa"
 		}
 	],
 	"settings": {
 		"files.exclude": {
 			"example": true
-		}
+		},
+        "editor.insertSpaces": true
 	}
 }
 ```

@@ -5,30 +5,41 @@ $if(colorlinks)$
 \PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
 $endif$
 
+% specify apa6 document mode with command to have a default
+$if(mode)$
+\newcommand{\pandocDocMode}{$mode$}$else$
+\newcommand{\pandocDocMode}{man}$endif$
+
 % apa6 mode and class options
-\documentclass[$if(classoption)$$mode$,longtable,$for(classoption)$$classoption$$sep$,$endfor$$else$$mode$,longtable$endif$$if(floatsintext)$,floatsintext$endif$]{apa6}
+\documentclass[$if(classoption)$\pandocDocMode,longtable,$for(classoption)$$classoption$$sep$,$endfor$$else$\pandocDocMode,longtable$endif$$if(floatsintext)$,floatsintext$endif$]{apa6}
 
 % for mode selection options
 \usepackage{ifthen}
+
+\newcommand{\forceLongTablePkg}{}
 
 % setup mode ifs
 \newif\ifmanmode
 \newif\ifdocmode
 \newif\ifjoumode
-\ifthenelse{\equal{\string $mode$}{\string man}}{
+\ifthenelse{\equal{\string \pandocDocMode}{\string man}}{
     \manmodetrue
 }{
-    \ifthenelse{\equal{\string $mode$}{\string doc}}{
+    \renewcommand{\forceLongTablePkg}{longtable}
+    \ifthenelse{\equal{\string \pandocDocMode}{\string doc}}{
         \docmodetrue
     }{
-        \ifthenelse{\equal{\string $mode$}{\string jou}}{
+        \ifthenelse{\equal{\string \pandocDocMode}{\string jou}}{
             \joumodetrue
         }{
 % None
 }}}
 
+
+\usepackage{\forceLongTablePkg}
+
 $if(floatsintext)$
-% floatsintext
+% floatsintext on
 $else$
 % man mode uses the endfloat package,
 % this will try to set tables and figures at the end for longtables too
@@ -258,17 +269,10 @@ $abstract$
 $if(keywords)$
 \keywords{$for(keywords)$$keywords$$sep$, $endfor$}$endif$
 
-$for(include-before)$
-% Other custom includes
-$include-before$
 
-$endfor$
+\newcommand{\journalOptions}{
+\ifthenelse{\equal{\string \pandocDocMode}{\string jou}}{
 
-\ifdocmode
-\usepackage{longtable}
-\fi
-
-\ifjoumode
 % Journal specific commands may go here:
 $if(joucommands.leftheader)$
 \leftheader{$joucommands.leftheader$}$endif$
@@ -280,24 +284,16 @@ $if(joucommands.ccoppy)$
 \ccoppy{$joucommands.ccoppy$}$endif$
 $if(joucommands.copnum)$
 \copnum{$joucommands.copnum$}$endif$
-% two column long table. has to be done at the end
-\usepackage{longtable}
-\makeatletter
-\let\oldlt\longtable
-\let\endoldlt\endlongtable
-\def\longtable{\@ifnextchar[\longtable@i \longtable@ii}
-\def\longtable@i[#1]{%
+}{}
+}
 
-\begin{figure}[btph]\onecolumn \begin{minipage}{0.5\textwidth} \oldlt[#1]}
-\def\longtable@ii{\begin{figure}[btph]\onecolumn \begin{minipage}{0.5\textwidth} \oldlt}
-\def\endlongtable{%
-\endoldlt
-\end{minipage}
+\journalOptions{}
 
-\twocolumn
-\end{figure}}
-\makeatother
-\fi
+$for(include-before)$
+% Other custom includes
+$include-before$
+
+$endfor$
 
 % table caption width
 \makeatletter
@@ -339,11 +335,29 @@ $if(joucommands.copnum)$
 $if(csl-refs)$
 \newlength{\cslhangindent}
 \setlength{\cslhangindent}{1.5em}
-\newenvironment{cslreferences}%
-  {$if(csl-hanging-indent)$\setlength{\parindent}{0pt}%
-  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces$endif$}%
-  {\par}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[3] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+  % set entry spacing
+  \ifnum #2 > 0
+  \setlength{\parskip}{#2\baselineskip}
+  \fi
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 $endif$
+
+% PREAMBLE END
+% --------------
+% DOCUMENT START
 
 \begin{document}
 $if(title)$\maketitle$endif$

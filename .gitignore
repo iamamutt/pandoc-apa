@@ -1,3 +1,5 @@
+*.DS_Store
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
@@ -50,4 +52,6 @@ pandoc/custom-reference.docx
 pandoc/apa_backup.docx
 pandoc/PM6E.pdf
 pandoc/APA_Template_2018.doc
-*.DS_Store
+test/
+*.log.json
+*.code-workspace

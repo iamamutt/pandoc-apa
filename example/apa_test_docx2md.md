@@ -34,7 +34,7 @@ The YAML metadata block is at the top of the document and take on key-value pair
 Words go here, also here is a citation (Lastname & Someone, 2016). According to Burling (2016),
 something bad happened. See Figure [[1]{custom-style="Hyperlink"}](#fig:myplot). This is a bold
 statement... **WOW!**, and here's \_some *emphasis for you* too. Sometimes you need some
-typewrite-like font, like when writing code: `my_answer = 1 + 1`. Other types you may need to
+typewriter-like font, like when writing code: `my_answer = 1 + 1`. Other types you may need to
 write blocks of code, like this:
 :::
 
@@ -51,13 +51,13 @@ write blocks of code, like this:
 :::
 
 ::: {custom-style="Captioned Figure"}
-[]{#fig:myplot .anchor}![Figure 1: Your figure caption goes
-here.](C:\Users\Joseph\Desktop\pandoc-apa\example/media/docx/media/rId20.png){width="3.33299978127734in"
+[]{#fig:myplot .anchor}![Figure 1: Your figure caption goes
+here.](C:\Users\Joseph\Dropbox\appdata\pandoc\pandoc-apa\example/media/docx/media/rId20.png){width="3.33299978127734in"
 height="3.33299978127734in"}
 :::
 
 ::: {custom-style="Image Caption"}
-Figure 1: Your figure caption goes here.
+Figure 1: Your figure caption goes here.
 :::
 
 ::: {custom-style="Body Text"}

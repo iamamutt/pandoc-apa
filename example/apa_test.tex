@@ -3,29 +3,37 @@
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
 
+% specify apa6 document mode with command to have a default
+\newcommand{\pandocDocMode}{man}
 % apa6 mode and class options
-\documentclass[man,longtable,noextraspace,floatsintext]{apa6}
+\documentclass[\pandocDocMode,longtable,noextraspace,floatsintext]{apa6}
 
 % for mode selection options
 \usepackage{ifthen}
+
+\newcommand{\forceLongTablePkg}{}
 
 % setup mode ifs
 \newif\ifmanmode
 \newif\ifdocmode
 \newif\ifjoumode
-\ifthenelse{\equal{\string man}{\string man}}{
+\ifthenelse{\equal{\string \pandocDocMode}{\string man}}{
     \manmodetrue
 }{
-    \ifthenelse{\equal{\string man}{\string doc}}{
+    \renewcommand{\forceLongTablePkg}{longtable}
+    \ifthenelse{\equal{\string \pandocDocMode}{\string doc}}{
         \docmodetrue
     }{
-        \ifthenelse{\equal{\string man}{\string jou}}{
+        \ifthenelse{\equal{\string \pandocDocMode}{\string jou}}{
             \joumodetrue
         }{
 % None
 }}}
 
-% floatsintext
+
+\usepackage{\forceLongTablePkg}
+
+% floatsintext on
 
 % other packages
 \usepackage{lmodern}
@@ -164,30 +172,15 @@ additional tweaking.
 }
 \keywords{sublime text, vscode, pandoc, apa6}
 
-\ifdocmode
-\usepackage{longtable}
-\fi
+\newcommand{\journalOptions}{
+\ifthenelse{\equal{\string \pandocDocMode}{\string jou}}{
 
-\ifjoumode
 % Journal specific commands may go here:
-% two column long table. has to be done at the end
-\usepackage{longtable}
-\makeatletter
-\let\oldlt\longtable
-\let\endoldlt\endlongtable
-\def\longtable{\@ifnextchar[\longtable@i \longtable@ii}
-\def\longtable@i[#1]{%
+}{}
+}
 
-\begin{figure}[btph]\onecolumn \begin{minipage}{0.5\textwidth} \oldlt[#1]}
-\def\longtable@ii{\begin{figure}[btph]\onecolumn \begin{minipage}{0.5\textwidth} \oldlt}
-\def\endlongtable{%
-\endoldlt
-\end{minipage}
+\journalOptions{}
 
-\twocolumn
-\end{figure}}
-\makeatother
-\fi
 
 % table caption width
 \makeatletter
@@ -226,6 +219,10 @@ additional tweaking.
 }
 \makeatother
 
+
+% PREAMBLE END
+% --------------
+% DOCUMENT START
 
 \begin{document}
 \maketitle
@@ -267,7 +264,7 @@ Words go here, also here is a citation \autocite{someArticle}. According
 to \textcite{anotherArticle}, something bad happened. See Figure
 \ref{fig:myplot}. This is a bold statement\ldots{} \textbf{WOW!}, and
 here's \_some \emph{emphasis for you} too. Sometimes you need some
-typewrite-like font, like when writing code:
+typewriter-like font, like when writing code:
 \texttt{my\_answer\ =\ 1\ +\ 1}. Other types you may need to write
 blocks of code, like this:
 

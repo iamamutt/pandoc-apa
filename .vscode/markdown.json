@@ -33,7 +33,8 @@
       "    Email: email@x.edu",
       "abstract: |",
       "    Abstract text goes here.",
-      "---"
+      "---",
+      ""
     ],
     "description": "Insert Pandoc APA6 yaml metadata snippet for vscode"
   }

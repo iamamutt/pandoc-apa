@@ -80,7 +80,7 @@ abstract: |
 ---
 ```
 
-Words go here, also here is a citation [@someArticle]. According to @anotherArticle, something bad happened. See Figure @fig:myplot. This is a bold statement... **WOW!**, and here's _some _emphasis for you_ too. Sometimes you need some typewrite-like font, like when writing code: `my_answer = 1 + 1`. Other types you may need to write blocks of code, like this:
+Words go here, also here is a citation [@someArticle]. According to @anotherArticle, something bad happened. See Figure @fig:myplot. This is a bold statement... **WOW!**, and here's _some _emphasis for you_ too. Sometimes you need some typewriter-like font, like when writing code: `my_answer = 1 + 1`. Other types you may need to write blocks of code, like this:
 
 ```latex
 \begin{table}
@@ -161,6 +161,7 @@ Age & Frequency \\ \hline
 36--45  & 22 \\ \hline
 \end{tabular}
 \end{table}
+
 
 Checking rendering of Table {@tbl:tbllong}.
 

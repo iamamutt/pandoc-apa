@@ -1,56 +1,38 @@
 {
-    "working_dir": "${file_path}",
-    "file_regex": "^((?:.:)?[^:\n\r]*):([0-9]+):?([0-9]+)?:? (.*)$",
     "cmd": [
         "pandoc",
         "${file_name}",
         "--from=markdown",
         "--to=latex",
         "--output=${file_base_name}.pdf",
-        "--filter=pandoc-fignos",
-        "--filter=pandoc-tablenos",
-        "--filter=pandoc-citeproc",
+        "--standalone",
+        "--citeproc",
+        "--filter=pandoc-xnos",
         "--csl=${packages}/User/pandoc-apa/pandoc/apa.csl",
-        "--template=${packages}/User/pandoc-apa/pandoc/apa_template.tex",
-        "--standalone"
+        "--template=${packages}/User/pandoc-apa/pandoc/apa_template.tex"
     ],
+    "file_regex": "^((?:.:)?[^:\n\r]*):([0-9]+):?([0-9]+)?:? (.*)$",
     "osx": {
         "path": "/usr/local/bin:/usr/texbin:/Library/TeX/texbin"
     },
     "variants": [
         {
-            "name": "Markdown to latex",
+            "name": "Markdown to docx",
             "cmd": [
                 "pandoc",
                 "${file_name}",
                 "--from=markdown",
-                "--to=latex",
-                "--output=${file_base_name}.tex",
-                "--filter=pandoc-fignos",
-                "--filter=pandoc-tablenos",
-                "--filter=pandoc-citeproc",
-                "--csl=${packages}/User/pandoc-apa/pandoc/apa.csl",
-                "--template=${packages}/User/pandoc-apa/pandoc/apa_template.tex",
-                "--standalone",
-                "--biblatex"
-            ]
-        },
-        {
-            "name": "Run",
-            "cmd": [
-                "pandoc",
-                "${file_name}",
-                "--from=markdown",
-                "--to=docx+smart",
+                "--to=docx",
                 "--output=${file_base_name}.docx",
                 "--dpi=300",
-                "--filter=pandoc-fignos",
-                "--filter=pandoc-tablenos",
-                "--filter=pandoc-citeproc",
+                "--standalone",
+                "--filter=pandoc-xnos",
+                "--citeproc",
                 "--csl=${packages}/User/pandoc-apa/pandoc/apa.csl",
                 "--reference-doc=${packages}/User/pandoc-apa/pandoc/apa.docx"
             ]
         }
     ],
-    "windows": {}
+    "windows": {},
+    "working_dir": "${file_path}"
 }
