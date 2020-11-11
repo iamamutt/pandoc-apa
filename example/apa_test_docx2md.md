@@ -52,7 +52,7 @@ write blocks of code, like this:
 
 ::: {custom-style="Captioned Figure"}
 []{#fig:myplot .anchor}![Figure 1: Your figure caption goes
-here.](C:\Users\Joseph\Dropbox\appdata\pandoc\pandoc-apa\example/media/docx/media/rId20.png){width="3.33299978127734in"
+here.](C:\Users\Joseph\Dropbox\appdata\pandoc\pandoc-apa\example\media\docx\media\rId20.png){width="3.33299978127734in"
 height="3.33299978127734in"}
 :::
 

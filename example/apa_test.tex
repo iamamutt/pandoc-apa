@@ -83,7 +83,7 @@
 \usepackage{hyperref}
 \hypersetup{
             pdftitle={Writing an APA manuscript with Pandoc markdown},
-            pdfauthor={Author 1, Author 2; Author 3},
+            pdfauthor={Author One, Author Two; Author Three},
             pdfkeywords={sublime text, vscode, pandoc, apa6},
             colorlinks=true,
             linkcolor=Blue,
@@ -142,8 +142,8 @@
 % Title page stuff
 \title{Writing an APA manuscript with Pandoc markdown}
 \shorttitle{Markdown to APA}
-\twoauthors{Author 1, Author 2}{Author 3}
-\twoaffiliations{Institute 1}{Institute 2}
+\twoauthors{Author One, Author Two}{Author Three}
+\twoaffiliations{Institute One}{Institute Two}
 
 \note{Last updated: \today}
 \authornote{%
@@ -355,30 +355,36 @@ hacks are added to the template to allow it to work (at the risk of
 losing content or bleeding off the page. Blame pandoc for using
 \texttt{longtable}).}\tabularnewline
 \toprule
-\begin{minipage}[b]{0.20\columnwidth}\raggedright
+\begin{minipage}[b]{(\columnwidth - 2\tabcolsep) * \real{0.22}}\raggedright
 Fruit\strut
-\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[b]{(\columnwidth - 2\tabcolsep) * \real{0.22}}\raggedright
 Price\strut
-\end{minipage} & \begin{minipage}[b]{0.27\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[b]{(\columnwidth - 2\tabcolsep) * \real{0.29}}\raggedright
 Advantages\strut
 \end{minipage}\tabularnewline
 \midrule
 \endfirsthead
 \toprule
-\begin{minipage}[b]{0.20\columnwidth}\raggedright
+\begin{minipage}[b]{(\columnwidth - 2\tabcolsep) * \real{0.22}}\raggedright
 Fruit\strut
-\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[b]{(\columnwidth - 2\tabcolsep) * \real{0.22}}\raggedright
 Price\strut
-\end{minipage} & \begin{minipage}[b]{0.27\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[b]{(\columnwidth - 2\tabcolsep) * \real{0.29}}\raggedright
 Advantages\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.20\columnwidth}\raggedright
+\begin{minipage}[t]{(\columnwidth - 2\tabcolsep) * \real{0.22}}\raggedright
 Bananas\strut
-\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[t]{(\columnwidth - 2\tabcolsep) * \real{0.22}}\raggedright
 \$1.34\strut
-\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[t]{(\columnwidth - 2\tabcolsep) * \real{0.29}}\raggedright
 \begin{itemize}
 \tightlist
 \item
@@ -387,11 +393,13 @@ Bananas\strut
   bright color
 \end{itemize}\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.20\columnwidth}\raggedright
+\begin{minipage}[t]{(\columnwidth - 2\tabcolsep) * \real{0.22}}\raggedright
 Oranges\strut
-\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[t]{(\columnwidth - 2\tabcolsep) * \real{0.22}}\raggedright
 \$2.10\strut
-\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[t]{(\columnwidth - 2\tabcolsep) * \real{0.29}}\raggedright
 \begin{itemize}
 \tightlist
 \item

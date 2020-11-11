@@ -9,11 +9,11 @@
         "cwd": "${fileDirname}"
     },
     "presentation": {
+        "clear": true,
         "echo": true,
         "focus": false,
         "panel": "shared",
-        "reveal": "silent",
-        "clear": true
+        "reveal": "silent"
     },
     "tasks": [
         {
@@ -99,10 +99,7 @@
                 "--csl=${workspaceRoot}/pandoc/apa.csl",
                 "--reference-doc=${workspaceRoot}/pandoc/apa.docx"
             ],
-            "group": {
-                "isDefault": true,
-                "kind": "test"
-            },
+            "group": "build",
             "dependsOn": [
                 "APA DOCX-RAW"
             ]

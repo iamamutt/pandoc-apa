@@ -6,15 +6,24 @@ classoption:                  # apa6 documentclass options (latex/pdf output)
     - noextraspace            # other options except floatsintext, man, jou, doc should go here.
 subtitle: Markdown to APA     # running head title
 author:                       # author list, each item is a GROUP of authors
-    - Author 1, Author 2      # these authors go with institute 1
-    - Author 3                # these go with institute 2
+    - Author One, Author Two  # these authors go with institute 1
+    - Author Three            # these go with institute 2
 institute:                    # institute list, matches author order
-    - Institute 1             # institute for Authors 1 and 2
-    - Institute 2             # institute for Author 3
+    - Institute One           # institute for Authors 1 and 2
+    - Institute Two           # institute for Author 3
 twogroups: true               # using the 'twogroups' field since authors span two universities
                               # this places authors with institutions in the output document
                               # if the field is missing, will align affiliations vertically
                               # other fields to use: threegroups, ..., sixgroups
+                              # For alternative author/affiliation assignment:
+# author: 
+#     - Author One^1^, Author Two ^1,2^, Author Three^1,3,4,5^
+# institute: 
+#     - ^1^Affiliation One
+#     - ^2^Affiliation Two
+#     - ^3^Affiliation Three
+#     - ^4^Affiliation Four
+#     - ^5^Affiliation Five
 bibliography:                 # delete bibliography field if not citing anything
     - references.bib          # use a new line for each .bib file
 date: "Last updated: \\today" # date is optional, can delete if not needed
